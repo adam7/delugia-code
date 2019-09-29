@@ -18,6 +18,8 @@ jobs:
         sudo apt-get install fontforge -y;
     - name: Download Font Patcher
       run: curl -L https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/font-patcher --output font-patcher 
+    - name: Make a directory for source fonts
+      run: mkdir -p src/glyphs
     - name: Install PIP
       run: sudo apt install python-pip -y
     - name: Install config

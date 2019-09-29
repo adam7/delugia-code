@@ -61,7 +61,7 @@ jobs:
     - name: Install configparser
       run: pip install configparser
     - name: Build Powerline
-      run: fontforge -script font-patcher --powerline Delugia.ttf 
+      run: fontforge -script font-patcher --powerline --no-progressbars Delugia.ttf 
     - uses: actions/upload-artifact@master
       with:
         path: "Delugia Code Nerd Font.ttf"

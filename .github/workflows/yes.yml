@@ -1,0 +1,17 @@
+name: Yes we can
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run a one-line script
+      run: echo Hello, world!
+    - name: Download latest version of Cascadia 
+      run: | 
+        curl -L https://github.com/microsoft/cascadia-code/releases/latest/download/Cascadia.ttf  --output Cascadia.ttf
+    - name: Install FontForge
+        sudo add-apt-repository ppa:fontforge/fontforge -y -u;
+        sudo apt-get install fontforge -y;

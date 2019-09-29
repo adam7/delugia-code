@@ -15,4 +15,7 @@ jobs:
       run: |
         echo Download latest version of Cascadia 
         curl -L https://github.com/microsoft/cascadia-code/releases/latest/download/Cascadia.ttf  --output Cascadia.ttf
-        echo Now to patch it
+        echo Install FontForge        
+        sudo add-apt-repository ppa:fontforge/fontforge -y -u;
+        sudo apt-get install fontforge -y;
+

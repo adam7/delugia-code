@@ -45,8 +45,14 @@ jobs:
     - name: Install configparser
       run: pip install configparser
     - name: Build Powerline
-      run: fontforge -script font-patcher --powerline --no-progressbars Delugia.ttf 
+      run: fontforge -script font-patcher --powerline --no-progressbars Delugia.ttf     
+    - name: Build Complete
+      run: fontforge -script font-patcher -c --no-progressbars Delugia.ttf 
     - uses: actions/upload-artifact@master
       with:
-        name: Upload fonts
-        path: "Cascadia Code Nerd Font.ttf"
+        name: Cascadia Code Nerd Font Powerline
+        path: "Cascadia Code Nerd Font.ttf"        
+    - uses: actions/upload-artifact@master
+      with:
+        name: Cascadia Code Nerd Font Complete
+        path: "Cascadia Code Nerd Font Complete.ttf"

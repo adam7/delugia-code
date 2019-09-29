@@ -11,7 +11,7 @@ jobs:
       run: echo Hello, world!
     - name: Download latest version of Cascadia 
       run: | 
-        curl -L https://github.com/microsoft/cascadia-code/releases/latest/download/Cascadia.ttf  --output Cascadia.ttf
+        curl -L https://github.com/microsoft/cascadia-code/releases/latest/download/Cascadia.ttf  --output Delugia.ttf
     - name: Install FontForge
       run: |
         sudo add-apt-repository ppa:fontforge/fontforge -y -u;
@@ -42,5 +42,9 @@ jobs:
         curl -L https://github.com/ryanoasis/nerd-fonts/blob/master/src/glyphs/weathericons-regular-webfont.ttf?raw=true --output src/glyphs/weathericons-regular-webfont.ttf
     - name: Install PIP
       run: sudo apt install python-pip -y
-    - name: Install config
+    - name: Install configparser
       run: pip install configparser
+    - name: Build Complete
+      run: fontforge -script font-patcher -c Delugia.ttf 
+    - name: Build Powerline
+      run: fontforge -script font-patcher -powerline Delugia.ttf 

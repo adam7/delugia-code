@@ -44,10 +44,8 @@ jobs:
       run: sudo apt install python-pip -y
     - name: Install configparser
       run: pip install configparser
-    - name: Build Complete
-      run: fontforge -script font-patcher -c Delugia.ttf 
     - name: Build Powerline
-      run: fontforge -script font-patcher -powerline Delugia.ttf 
+      run: fontforge -script font-patcher --powerline Delugia.ttf 
     - uses: actions/upload-artifact@master
       with:
-        path: "Delugia Code Nerd Font Complete.ttf"
+        path: "Delugia Code Nerd Font.ttf"

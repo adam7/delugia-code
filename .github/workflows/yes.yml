@@ -16,3 +16,9 @@ jobs:
       run: |
         sudo add-apt-repository ppa:fontforge/fontforge -y -u;
         sudo apt-get install fontforge -y;
+    - name: Download Font Patcher
+      run: curl -L https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/font-patcher --output font-patcher 
+    - name: Install PIP
+      run: sudo apt install python-pip -y
+    - name: Install config
+      run: pip install configparser

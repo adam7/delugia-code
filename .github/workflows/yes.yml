@@ -48,4 +48,5 @@ jobs:
       run: fontforge -script font-patcher --powerline --no-progressbars Delugia.ttf 
     - uses: actions/upload-artifact@master
       with:
+        name: Upload fonts
         path: "Cascadia Code Nerd Font.ttf"

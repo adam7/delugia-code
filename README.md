@@ -7,3 +7,6 @@ https://www.hanselman.com/blog/PatchingTheNewCascadiaCodeToIncludePowerlineGlyph
 and
 
 https://github.com/microsoft/cascadia-code/issues/10?WT.mc_id=-blog-scottha#issuecomment-532969414
+
+The answer is yes 
+[![Actions Status](https://github.com/adam7/delugia-code/workflows/yes/badge.svg)](https://github.com/adam7/delugia-code/actions)

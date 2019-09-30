@@ -5,3 +5,6 @@ Can we add Nerd Fonts to Cascadia Code Font using a GitHub Action?
 
 ### The answer is yes 
 [![Actions Status](https://github.com/adam7/delugia-code/workflows/Generate%20Fonts/badge.svg)](https://github.com/adam7/delugia-code/actions)
+
+### How to use
+Click the badge above to go to the Actions page and you can download Delugia Nerd Font Powerline or Delugia Nerd Font Complete from the artifacts there.

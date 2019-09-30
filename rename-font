@@ -1,0 +1,19 @@
+#!/usr/bin/env python
+# coding=utf8
+
+import fontforge
+
+name="Delugia" 
+file_name="./{}.ttf".format(name)
+
+# Open the file
+delugia=fontforge.open(file_name)              
+
+# Rename the file
+delugia.fontname=name
+delugia.familyname=name
+delugia.fullname=name
+delugia.copyright=name
+
+# Save
+delugia.generate(file_name)

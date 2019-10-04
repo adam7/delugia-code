@@ -60,7 +60,7 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: |
-          Delugia Nerd Font Powerline.ttf
+          Delugia Nerd Font.ttf
           Delugia Nerd Font Complete.ttf
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

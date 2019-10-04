@@ -62,6 +62,5 @@ jobs:
         files: |
           "Delugia Nerd Font Powerline.zip"
           "Delugia Nerd Font Complete.zip"
-        draft: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

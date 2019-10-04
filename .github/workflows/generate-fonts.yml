@@ -55,3 +55,13 @@ jobs:
       with:
         name: Delugia Nerd Font Complete
         path: "Delugia Nerd Font Complete.ttf"
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: |
+          "Delugia Nerd Font Powerline.zip"
+          "Delugia Nerd Font Complete.zip"
+        draft: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

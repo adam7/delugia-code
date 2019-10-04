@@ -62,5 +62,7 @@ jobs:
         files: |
           "Delugia Nerd Font Powerline.ttf"
           "Delugia Nerd Font Complete.ttf"
+          Delugia.ttf
+          rename_font
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

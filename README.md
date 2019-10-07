@@ -13,6 +13,6 @@ I wrote a [blog post with more details](https://admcpr.com/2019/10/07/automating
 You can download the patched font from the [Releases page](https://github.com/adam7/delugia-code/releases) of this repo and install them as you would any other font.
 
 ### Help!
-I know basically nothing about patching fonts so all contributions are  welcome. 
+I know basically nothing about patching fonts so all contributions are 🦸‍ welcome. 
 
 

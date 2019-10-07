@@ -5,7 +5,14 @@ Inspired by [Scott Hanselman](https://www.hanselman.com/blog/PatchingTheNewCasca
 
 The answer, it turns out, is yes.
 
+I wrote a [blog post with more details](https://admcpr.com/2019/10/07/automating-the-patching-of-cascadia-code-to-include-nerd-fonts/) about how this works.
+
 [![Actions Status](https://github.com/adam7/delugia-code/workflows/Generate%20Fonts/badge.svg)](https://github.com/adam7/delugia-code/actions)
 
 ### How to use
 You can download the patched font from the [Releases page](https://github.com/adam7/delugia-code/releases) of this repo and install them as you would any other font.
+
+### Help!
+I know basically nothing about patching fonts so all contributions are  welcome. 
+
+

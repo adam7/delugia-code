@@ -10,9 +10,9 @@ I wrote a [blog post with more details](https://admcpr.com/2019/10/07/automating
 [![Actions Status](https://github.com/adam7/delugia-code/workflows/Generate%20Fonts/badge.svg)](https://github.com/adam7/delugia-code/actions)
 
 ### How to use
-You can download the patched font from the [Releases page](https://github.com/adam7/delugia-code/releases) of this repo and install them as you would any other font. Once installed the font can be referenced as `Delugia Nerd Font`. So if, for example, you want to use it in Windows Terminal you should add this line to your profiles.json
+You can download the patched font from the [Releases page](https://github.com/adam7/delugia-code/releases) of this repo and install them as you would any other font. Once installed the font can be referenced as `Delugia Nerd Font Mono`. So if, for example, you want to use it in Windows Terminal you should add this line to your profiles.json
 
-`"fontFace" : "Delugia Nerd Font",`
+`"fontFace" : "Delugia Nerd Font Mono",`
 
 ### Help!
 I know basically nothing about patching fonts so all contributions are 🦸‍ welcome. 

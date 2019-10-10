@@ -49,18 +49,18 @@ jobs:
       run: fontforge -script font-patcher -c --no-progressbars --mono Delugia.ttf 
     - uses: actions/upload-artifact@master
       with:
-        name: Delugia Nerd Font Powerline
-        path: "Delugia Nerd Font.ttf"        
+        name: Delugia Nerd Font Powerline Mono
+        path: "Delugia Nerd Font Mono.ttf"        
     - uses: actions/upload-artifact@master
       with:
-        name: Delugia Nerd Font Complete
-        path: "Delugia Nerd Font Complete.ttf"
+        name: Delugia Nerd Font Complete Mono
+        path: "Delugia Nerd Font Complete Mono.ttf"
     - name: Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: |
-          Delugia Nerd Font.ttf
-          Delugia Nerd Font Complete.ttf
+          Delugia Nerd Font Mono.ttf
+          Delugia Nerd Font Complete Mono.ttf
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

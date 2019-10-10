@@ -49,7 +49,7 @@ jobs:
       run: fontforge -script font-patcher -c --no-progressbars --mono Delugia.ttf 
     - uses: actions/upload-artifact@master
       with:
-        name: Delugia Nerd Font Powerline Mono
+        name: Delugia Nerd Font Powerline Mono style
         path: "Delugia Nerd Font Mono.ttf"        
     - uses: actions/upload-artifact@master
       with:

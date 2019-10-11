@@ -14,5 +14,12 @@ You can download the patched font from the [Releases page](https://github.com/ad
 
 `"fontFace" : "Delugia Nerd Font",`
 
+### Installation with [scoop.sh](https://scoop.sh)
+You can use [scoop.sh](https://scoop.sh) to install and update the font. At first install [scoop](https://github.com/lukesampson/scoop) and add extra bucket for [nerd-fonts](https://github.com/matthewjberger/scoop-nerd-fonts): 
+1) `iwr -useb get.scoop.sh | iex`
+2) `scoop bucket add nerd-fonts`
+3) `scoop install sudo`
+4) `sudo scoop install Delugia-Code`
+
 ### Help!
 I know basically nothing about patching fonts so all contributions are 🦸‍ welcome. 

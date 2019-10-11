@@ -18,7 +18,9 @@ jobs:
     - name: Download Font Patcher
       run: curl -L https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/font-patcher --output font-patcher 
     - name: Download source fonts
-      run: ./download-source-fonts.sh
+      run: |
+        chmod +x download-source-fonts.sh
+        ./download-source-fonts.sh
     - name: Install PIP
       run: sudo apt install python-pip -y
     - name: Install configparser

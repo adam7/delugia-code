@@ -1,3 +1,5 @@
+#!/bin/sh
+
 mkdir -p src/glyphs
 
 curl -L https://github.com/ryanoasis/nerd-fonts/blob/master/src/glyphs/FontAwesome.otf?raw=true --output src/glyphs/FontAwesome.otf

@@ -2,18 +2,23 @@
 # coding=utf8
 
 import fontforge
+from argparse import ArgumentParser
 
-name="Delugia" 
-file_name="./{}.ttf".format(name)
+# Setup and parse the comand-line arguments
+parser = ArgumentParser()
+parser.add_argument("--input", help="input file name")
+parser.add_argument("--output", help="output file name")
+parser.add_argument("--name", help="font name")
+args = parser.parse_args()
 
 # Open the file
-delugia=fontforge.open(file_name)              
+delugia=fontforge.open(args.input)              
 
 # Rename the file
-delugia.fontname=name
-delugia.familyname=name
-delugia.fullname=name
-delugia.copyright=name
+delugia.fontname=args.name
+delugia.familyname=args.name
+delugia.fullname=args.name
+delugia.copyright=args.name
 
 # Save
-delugia.generate(file_name)
+delugia.generate(args.output)

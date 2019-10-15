@@ -13,8 +13,6 @@ jobs:
       run: |
         sudo add-apt-repository ppa:fontforge/fontforge -y -u;
         sudo apt-get install fontforge -y;
-    - name: Change the fontname, fontfamilyname, copyright etc.
-      run: fontforge rename-font
     - name: Download Font Patcher
       run: curl -L https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/font-patcher --output font-patcher 
     - name: Download source fonts

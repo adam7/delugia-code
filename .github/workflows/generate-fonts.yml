@@ -8,7 +8,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Download latest version of Cascadia 
-      run: curl -L https://github.com/microsoft/cascadia-code/releases/latest/download/Cascadia.ttf  --output Delugia.ttf
+      run: curl -L https://github.com/microsoft/cascadia-code/releases/latest/download/Cascadia.ttf  --output Cascadia.ttf
     - name: Install FontForge
       run: |
         sudo add-apt-repository ppa:fontforge/fontforge -y -u;
@@ -26,23 +26,27 @@ jobs:
     - name: Install configparser
       run: pip install configparser
     - name: Build Powerline
-      run: fontforge -script font-patcher --powerline --no-progressbars --mono Delugia.ttf     
+      run: |
+        fontforge -script font-patcher --powerline --no-progressbars --mono Cascadia.ttf     
+        fontforge rename-font --input "Cascadia Code Nerd Font Mono.ttf" --output "Delugia Code Nerd Font.ttf" --name "Delugia Nerd Font"
     - name: Build Complete
-      run: fontforge -script font-patcher -c --no-progressbars --mono Delugia.ttf 
+      run: |
+        fontforge -script font-patcher -c --no-progressbars --mono Cascadia.ttf 
+        fontforge rename-font --input "Cascadia Code Nerd Font Complete Mono.ttf" --output "Delugia Code Nerd Font Complete.ttf" --name "Delugia Nerd Font"
     - uses: actions/upload-artifact@master
       with:
-        name: Delugia Nerd Font Powerline Mono style
-        path: "Delugia Nerd Font Mono.ttf"        
+        name: Delugia Nerd Font Powerline
+        path: "Delugia Nerd Font.ttf"        
     - uses: actions/upload-artifact@master
       with:
-        name: Delugia Nerd Font Complete Mono
-        path: "Delugia Nerd Font Complete Mono.ttf"
+        name: Delugia Nerd Font Complete
+        path: "Delugia Nerd Font Complete.ttf"
     - name: Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: |
-          Delugia Nerd Font Mono.ttf
-          Delugia Nerd Font Complete Mono.ttf
+          Delugia Nerd Font.ttf
+          Delugia Nerd Font Complete.ttf
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

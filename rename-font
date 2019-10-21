@@ -15,10 +15,12 @@ args = parser.parse_args()
 delugia=fontforge.open(args.input)              
 
 # Rename the file
-delugia.fontname=args.name
+delugia.fontname="{}-Regular".format(args.name)
 delugia.familyname=args.name
 delugia.fullname=args.name
-delugia.copyright=args.name
+delugia.appendSFNTName("English (US)", "Copyright", "Need something here")
+delugia.appendSFNTName("English (US)", "UniqueID", "{} Regular".format(name))
+delugia.appendSFNTName("English (US)", "Trademark", "")
 
 # Save
 delugia.generate(args.output)

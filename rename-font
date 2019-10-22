@@ -24,5 +24,9 @@ delugia.appendSFNTName("English (US)", "Copyright", "Need something here")
 delugia.appendSFNTName("English (US)", "UniqueID", "{} Regular".format(args.name))
 delugia.appendSFNTName("English (US)", "Trademark", "")
 
+# The grave accent type is somehow not correctly detected;
+# we want it to be an ordinary character
+delugia["grave"].glyphclass="baseglyph"
+
 # Save
 delugia.generate(args.output)

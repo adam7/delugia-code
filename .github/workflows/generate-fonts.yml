@@ -25,12 +25,12 @@ jobs:
       run: pip install configparser
     - name: Build Powerline
       run: |
-        fontforge -script font-patcher --powerline --no-progressbars --mono Cascadia.ttf     
-        fontforge rename-font --input "Cascadia Code Nerd Font Mono.ttf" --output "Delugia Nerd Font.ttf" --name "Delugia Nerd Font"
+        fontforge -script font-patcher --powerline --no-progressbars Cascadia.ttf
+        fontforge rename-font --input "Cascadia Code Nerd Font.ttf" --output "Delugia Nerd Font.ttf" --name "Delugia Nerd Font"
     - name: Build Complete
       run: |
-        fontforge -script font-patcher -c --no-progressbars --mono Cascadia.ttf 
-        fontforge rename-font --input "Cascadia Code Nerd Font Complete Mono.ttf" --output "Delugia Nerd Font Complete.ttf" --name "Delugia Nerd Font"
+        fontforge -script font-patcher -c --no-progressbars Cascadia.ttf
+        fontforge rename-font --input "Cascadia Code Nerd Font Complete.ttf" --output "Delugia Nerd Font Complete.ttf" --name "Delugia Nerd Font"
     - uses: actions/upload-artifact@master
       with:
         name: Delugia Nerd Font Powerline

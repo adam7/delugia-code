@@ -20,7 +20,6 @@ delugia.familyname=args.name
 delugia.fullname=args.name
 delugia.appendSFNTName("English (US)", "Preferred Family", args.name)
 delugia.appendSFNTName("English (US)", "Compatible Full", args.name)
-delugia.appendSFNTName("English (US)", "Copyright", "Need something here")
 delugia.appendSFNTName("English (US)", "UniqueID", "{} Regular".format(args.name))
 delugia.appendSFNTName("English (US)", "Trademark", "")
 

@@ -32,7 +32,7 @@ jobs:
     - name: Build Complete
       run: |
         fontforge -script font-patcher -c --no-progressbars --mono Cascadia.ttf 
-        fontforge rename-font --input "Cascadia Code Nerd Font Complete Mono.ttf" --output "Delugia Nerd Font Complete.ttf" --name "Delugia Nerd Font"
+        git describe --always | xargs fontforge rename-font --input "Cascadia Code Nerd Font Complete Mono.ttf" --output "Delugia Nerd Font Complete.ttf" --name "Delugia Nerd Font" --version
     - uses: actions/upload-artifact@master
       with:
         name: Delugia Nerd Font Powerline

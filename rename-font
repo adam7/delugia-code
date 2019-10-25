@@ -9,6 +9,7 @@ parser = ArgumentParser()
 parser.add_argument("--input", help="input file name")
 parser.add_argument("--output", help="output file name")
 parser.add_argument("--name", help="font name")
+parser.add_argument("--version", help="(optional) text to add to the existing version")
 args = parser.parse_args()
 
 # Open the file
@@ -26,6 +27,10 @@ delugia.appendSFNTName("English (US)", "Trademark", "")
 # The grave accent type is somehow not correctly detected;
 # we want it to be an ordinary character
 delugia["grave"].glyphclass="baseglyph"
+
+# Mix our version information in
+if (args.version):
+    delugia.version="{}/{}".format(delugia.version, args.version)
 
 # Save
 delugia.generate(args.output)

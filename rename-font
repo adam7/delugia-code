@@ -30,7 +30,10 @@ delugia["grave"].glyphclass="baseglyph"
 
 # Mix our version information in
 if (args.version):
-    delugia.version="{}/{}".format(delugia.version, args.version)
+    enriched_version = "{}/{}".format(delugia.version, args.version)
+    delugia.appendSFNTName("English (US)", "Version", enriched_version)
+    delugia.version = enriched_version
+    print("Set new font version {}".format(delugia.version));
 
 # Save
 delugia.generate(args.output)

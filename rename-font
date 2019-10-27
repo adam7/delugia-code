@@ -29,11 +29,8 @@ delugia.appendSFNTName("English (US)", "Trademark", "")
 delugia["grave"].glyphclass="baseglyph"
 
 # Mix our version information in
-if (args.version):
-    enriched_version = "{}/{}".format(delugia.version, args.version)
-    delugia.appendSFNTName("English (US)", "Version", enriched_version)
-    delugia.version = enriched_version
-    print("Set new font version {}".format(delugia.version));
+delugia.appendSFNTName("English (US)", "Version", args.version)
+delugia.version = args.version
 
 # Save
 delugia.generate(args.output)

@@ -19,7 +19,7 @@ You can use [scoop.sh](https://scoop.sh) to install and update the font. At firs
 1) `iwr -useb get.scoop.sh | iex`
 2) `scoop bucket add nerd-fonts`
 3) `scoop install sudo`
-4) `sudo scoop install Delugia-Code`
+4) `sudo scoop install Delugia-Nerd-Font` or `sudo scoop install Delugia-Nerd-Font-Complete`
 
 ### Help!
 I know basically nothing about patching fonts so all contributions are 🦸‍ welcome. 

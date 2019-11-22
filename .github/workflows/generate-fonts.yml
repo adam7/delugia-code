@@ -27,18 +27,21 @@ jobs:
       run: pip install configparser
     - name: Build Powerline
       run: |
-        fontforge -script font-patcher --powerline --no-progressbars --mono Cascadia.ttf
-        git describe --always | xargs fontforge rename-font --input "Cascadia Code Nerd Font Mono.ttf" \
+        fontforge -script font-patcher --careful --powerline --no-progressbars --mono Cascadia.ttf | tee process.log
+        git describe --always | xargs fontforge rename-font --input Cascadia*\ Nerd\ Font\ Mono.ttf \
                                                             --output "Delugia Nerd Font.ttf" \
                                                             --name "Delugia Nerd Font" \
                                                             --version
     - name: Build Complete
       run: |
-        fontforge -script font-patcher -c --no-progressbars --mono Cascadia.ttf
-        git describe --always | xargs fontforge rename-font --input "Cascadia Code Nerd Font Complete Mono.ttf" \
+        fontforge -script font-patcher --careful -c --no-progressbars --mono Cascadia.ttf | tee process_full.log
+        git describe --always | xargs fontforge rename-font --input Cascadia*\ Nerd\ Font\ Complete\ Mono.ttf \
                                                             --output "Delugia Nerd Font Complete.ttf" \
                                                             --name "Delugia Nerd Font" \
                                                             --version
+    - name: Check for preexisting glyphs
+      run: |
+        grep 'Found existing' process*.log
     - uses: actions/upload-artifact@master
       with:
         name: Delugia Nerd Font Powerline

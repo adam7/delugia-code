@@ -15,8 +15,8 @@ jobs:
         sudo apt-get install fontforge -y;
     - name: Download Font Patcher
       run: curl -L https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/font-patcher --output font-patcher
-    - name: Patch Font Patcher for Ligature Glyphs
-      run: patch -u font-patcher < font-patcher.patch
+#     - name: Patch Font Patcher for Ligature Glyphs
+#       run: patch -u font-patcher < font-patcher.patch
     - name: Download source fonts
       run: |
         chmod +x download-source-fonts.sh

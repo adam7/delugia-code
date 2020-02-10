@@ -20,3 +20,4 @@ curl -L https://github.com/ryanoasis/nerd-fonts/blob/v2.1.0/src/glyphs/materiald
 curl -L https://github.com/ryanoasis/nerd-fonts/blob/v2.1.0/src/glyphs/octicons.ttf?raw=true --output src/glyphs/octicons.ttf
 curl -L https://github.com/ryanoasis/nerd-fonts/blob/v2.1.0/src/glyphs/original-source.otf?raw=true --output src/glyphs/original-source.otf
 curl -L https://github.com/ryanoasis/nerd-fonts/blob/v2.1.0/src/glyphs/weathericons-regular-webfont.ttf?raw=true --output src/glyphs/weathericons-regular-webfont.ttf
+curl -L https://github.com/ryanoasis/nerd-fonts/blob/v2.1.0/src/unpatched-fonts/Hack/Regular/Hack-Regular.ttf?raw=true --output src/glyphs/Hack-Regular.ttf

@@ -3,8 +3,8 @@
 mkdir -p src/glyphs
 
 curl -L https://github.com/ryanoasis/nerd-fonts/blob/v2.1.0/src/glyphs/FontAwesome.otf?raw=true --output src/glyphs/FontAwesome.otf
-curl -L https://raw.githubusercontent.com/ryanoasis/nerd-fonts/v2.1.0/src/glyphs/NerdFontsSymbols%201000%20EM%20Nerd%20Font%20Complete%20Blank.sfd --output "src/glyphs/NerdFontsSymbols 1000 EM Nerd Font Complete Blank.sfd"
-curl -L https://raw.githubusercontent.com/ryanoasis/nerd-fonts/v2.1.0/src/glyphs/NerdFontsSymbols%202048%20EM%20Nerd%20Font%20Complete%20Blank.sfd --output "src/glyphs/NerdFontsSymbols 2048 EM Nerd Font Complete Blank.sfd"
+curl -L https://github.com/ryanoasis/nerd-fonts/blob/v2.1.0/src/glyphs/NerdFontsSymbols%201000%20EM%20Nerd%20Font%20Complete%20Blank.sfd?raw=true --output "src/glyphs/NerdFontsSymbols 1000 EM Nerd Font Complete Blank.sfd"
+curl -L https://github.com/ryanoasis/nerd-fonts/blob/v2.1.0/src/glyphs/NerdFontsSymbols%202048%20EM%20Nerd%20Font%20Complete%20Blank.sfd?raw=true --output "src/glyphs/NerdFontsSymbols 2048 EM Nerd Font Complete Blank.sfd"
 curl -L https://github.com/ryanoasis/nerd-fonts/blob/v2.1.0/src/glyphs/Pomicons.otf?raw=true --output src/glyphs/Pomicons.otf
 curl -L https://github.com/ryanoasis/nerd-fonts/blob/v2.1.0/src/glyphs/PowerlineExtraSymbols.otf?raw=true --output src/glyphs/PowerlineExtraSymbols.otf
 curl -L https://github.com/ryanoasis/nerd-fonts/blob/v2.1.0/src/glyphs/PowerlineSymbols.otf?raw=true --output src/glyphs/PowerlineSymbols.otf

@@ -14,7 +14,7 @@ jobs:
         sudo add-apt-repository ppa:fontforge/fontforge -y -u;
         sudo apt-get install fontforge -y;
     - name: Download Font Patcher
-      run: curl -L https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/font-patcher --output font-patcher
+      run: curl -L https://raw.githubusercontent.com/ryanoasis/nerd-fonts/v2.1.0/font-patcher --output font-patcher
     - name: Download source fonts
       run: |
         chmod +x download-source-fonts.sh
@@ -23,17 +23,21 @@ jobs:
       run: sudo apt install python-pip -y
     - name: Install configparser
       run: pip install configparser
+    - name: Extract additional powerline glyphs
+      run: fontforge -lang=ff -script extract-math-glyphs
     - name: Build Powerline
       run: |
-        fontforge -script font-patcher --careful --powerline --no-progressbars --mono Cascadia.ttf | tee process.log
-        git describe --always | xargs fontforge rename-font --input Cascadia*\ Nerd\ Font\ Mono.ttf \
+        fontforge -script font-patcher --careful --powerline --custom SomeMathSymbols.otf \
+                                       --no-progressbars --mono Cascadia.ttf | tee process.log
+        git describe --always | xargs fontforge rename-font --input Cas*\ Nerd\ Font\ Mono.ttf \
                                                             --output "Delugia Nerd Font.ttf" \
                                                             --name "Delugia Nerd Font" \
                                                             --version
     - name: Build Complete
       run: |
-        fontforge -script font-patcher --careful -c --no-progressbars --mono Cascadia.ttf | tee process_full.log
-        git describe --always | xargs fontforge rename-font --input Cascadia*\ Nerd\ Font\ Complete\ Mono.ttf \
+        fontforge -script font-patcher --careful -c --custom SomeMathSymbols.otf \
+                                       --no-progressbars --mono Cascadia.ttf | tee process_full.log
+        git describe --always | xargs fontforge rename-font --input Cas*\ Nerd\ Font\ Complete\ Mono.ttf \
                                                             --output "Delugia Nerd Font Complete.ttf" \
                                                             --name "Delugia Nerd Font" \
                                                             --version

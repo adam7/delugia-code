@@ -5,6 +5,8 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NERDFONTVERS: v2.1.0
     steps:
     - uses: actions/checkout@v1
     - name: Download latest version of Cascadia
@@ -14,7 +16,7 @@ jobs:
         sudo add-apt-repository ppa:fontforge/fontforge -y -u;
         sudo apt-get install fontforge -y;
     - name: Download Font Patcher
-      run: curl -L https://raw.githubusercontent.com/ryanoasis/nerd-fonts/v2.1.0/font-patcher --output font-patcher
+      run: curl -L https://raw.githubusercontent.com/ryanoasis/nerd-fonts/${NERDFONTVERS}/font-patcher --output font-patcher
     - name: Download source fonts
       run: |
         chmod +x download-source-fonts.sh

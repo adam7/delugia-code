@@ -29,8 +29,10 @@ delugia.appendSFNTName("English (US)", "Trademark", "")
 delugia["grave"].glyphclass="baseglyph"
 
 # Mix our version information in
+delugia.sfntRevision = None # Auto-set (refreshed) by fontforge
 delugia.appendSFNTName("English (US)", "Version", args.version)
 delugia.version = args.version
 
 # Save
 delugia.generate(args.output)
+print("Generated '{}' from {} version {}".format(args.output, args.name, args.version))

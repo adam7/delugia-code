@@ -11,6 +11,35 @@ I wrote a [blog post with more details](https://admcpr.com/2019/10/07/automating
 
 > ⚠ Cascadia now [bundles Powerline symbols](https://github.com/microsoft/cascadia-code/issues/10) so you almost definitely don't need to use this. Just grab the PL version from the latest [Cascadia release](https://github.com/microsoft/cascadia-code/releases). 
 
+> ⚠ Cascadia is now also part of Nerd Fonts' [prepatched font repository](https://github.com/ryanoasis/nerd-fonts#patched-fonts). You can grab it there, and it is almost what you find as Delugia font here. There are some small differences, see below.
+
+### What is Nerd Fonts anyway?
+[Nerd Fonts](https://www.nerdfonts.com) takes popular programming fonts and adds a bunch of Glyphs. They include all the absolutely [indispensable symbols](https://github.com/ryanoasis/nerd-fonts/wiki/Glyph-Sets-and-Code-Points) all nerds need in their favorite fonts.
+Go to their [repository](https://github.com/ryanoasis/nerd-fonts) or have a look at the [overview](https://www.nerdfonts.com/#cheat-sheet).
+
+Typically they come in two flavours:
+* Powerline (adds the symbols needed to have a basic [Powerline](https://github.com/powerline) and some more.)
+* Complete (adds even more Powerline symbols and all other symbols Nerd Fonts has collected.)
+
+_Powerline_ includes these symbols:
+* Powerline Symbols
+* [Seti-UI](https://atom.io/themes/seti-ui#current_icons)
+* [Devicons](http://vorillaz.github.io/devicons/)
+
+_Complete_ includes these symbols additionally:
+* [Powerline Extra Symbols](https://github.com/ryanoasis/powerline-extra-symbols)
+* [Pomicons](https://github.com/gabrielelana/pomicons)
+* [Font Awesome](https://github.com/FortAwesome/Font-Awesome) and [Extension](https://github.com/AndreLZGava/font-awesome-extension)
+* [Power Symbols](https://unicodepowersymbol.com/)
+* [Material Design Icons](https://github.com/Templarian/MaterialDesign)
+* [Font Logos](https://github.com/Lukas-W/font-logos)
+* [Octicons](https://github.com/github/octicons)
+
+### How is Delugia special?
+Compared with other patched versions of Cascadia you will find
+* Backtick char `` ` `` working in ligature enabled environments
+* Added symbols ``≢`` (0u2262) and ``≣`` (0u2263) used with some popular Powerline setups
+
 ### How to use
 You can download the patched font from the [Releases page](https://github.com/adam7/delugia-code/releases) of this repo and install them as you would any other font. Once installed the font can be referenced as `Delugia Nerd Font`. So if, for example, you want to use it in Windows Terminal you should add this line to your profiles.json
 

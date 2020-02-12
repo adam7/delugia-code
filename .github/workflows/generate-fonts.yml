@@ -31,7 +31,7 @@ jobs:
       run: |
         fontforge -script font-patcher --careful --powerline --custom SomeMathSymbols.otf \
                                        --no-progressbars --mono Cascadia.ttf | tee process.log
-        git describe --always | xargs fontforge rename-font --input Cas*\ Nerd\ Font\ Mono.ttf \
+        git describe --always --tags | xargs fontforge rename-font --input Cas*\ Nerd\ Font\ Mono.ttf \
                                                             --output "Delugia Nerd Font.ttf" \
                                                             --name "Delugia Nerd Font" \
                                                             --version
@@ -39,7 +39,7 @@ jobs:
       run: |
         fontforge -script font-patcher --careful -c --custom SomeMathSymbols.otf \
                                        --no-progressbars --mono Cascadia.ttf | tee process_full.log
-        git describe --always | xargs fontforge rename-font --input Cas*\ Nerd\ Font\ Complete\ Mono.ttf \
+        git describe --always --tags | xargs fontforge rename-font --input Cas*\ Nerd\ Font\ Complete\ Mono.ttf \
                                                             --output "Delugia Nerd Font Complete.ttf" \
                                                             --name "Delugia Nerd Font" \
                                                             --version

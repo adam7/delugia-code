@@ -1,5 +1,6 @@
 Open("src/glyphs/Hack-Regular.ttf");
 SelectAll();
 SelectFewer(0u2262,0u2263);
+SelectFewer(0u276F);
 Clear();
 Generate("src/glyphs/SomeExtraSymbols.otf");

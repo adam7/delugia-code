@@ -38,7 +38,7 @@ _Complete_ includes these symbols additionally:
 ### How is Delugia special?
 Compared with other patched versions of Cascadia you will find
 * Backtick char `` ` `` working in ligature enabled environments
-* Added symbols ``≢`` (0u2262) and ``≣`` (0u2263) used with some popular Powerline setups
+* Added symbols ``≢`` (0u2262), ``≣`` (0u2263), and ``❯`` (0u276F) used with some popular Powerline setups
 
 ### How to use
 You can download the patched font from the [Releases page](https://github.com/adam7/delugia-code/releases) of this repo and install them as you would any other font. Once installed the font can be referenced as `Delugia Nerd Font`. So if, for example, you want to use it in Windows Terminal you should add this line to your profiles.json

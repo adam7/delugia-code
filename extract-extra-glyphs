@@ -2,4 +2,4 @@ Open("src/glyphs/Hack-Regular.ttf");
 SelectAll();
 SelectFewer(0u2262,0u2263);
 Clear();
-Generate("src/glyphs/SomeMathSymbols.otf");
+Generate("src/glyphs/SomeExtraSymbols.otf");

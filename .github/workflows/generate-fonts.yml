@@ -26,10 +26,10 @@ jobs:
     - name: Install configparser
       run: pip install configparser
     - name: Extract additional powerline glyphs
-      run: fontforge -lang=ff -script extract-math-glyphs
+      run: fontforge -lang=ff -script extract-extra-glyphs
     - name: Build Powerline
       run: |
-        fontforge -script font-patcher --careful --powerline --custom SomeMathSymbols.otf \
+        fontforge -script font-patcher --careful --powerline --custom SomeExtraSymbols.otf \
                                        --no-progressbars --mono Cascadia.ttf | tee process.log
         git describe --always --tags | xargs fontforge rename-font --input Cas*\ Nerd\ Font\ Mono.ttf \
                                                             --output "Delugia Nerd Font.ttf" \
@@ -37,7 +37,7 @@ jobs:
                                                             --version
     - name: Build Complete
       run: |
-        fontforge -script font-patcher --careful -c --custom SomeMathSymbols.otf \
+        fontforge -script font-patcher --careful -c --custom SomeExtraSymbols.otf \
                                        --no-progressbars --mono Cascadia.ttf | tee process_full.log
         git describe --always --tags | xargs fontforge rename-font --input Cas*\ Nerd\ Font\ Complete\ Mono.ttf \
                                                             --output "Delugia Nerd Font Complete.ttf" \

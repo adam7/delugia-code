@@ -35,6 +35,12 @@ _Complete_ includes these symbols additionally:
 * [Font Logos](https://github.com/Lukas-W/font-logos)
 * [Octicons](https://github.com/github/octicons)
 
+### Which font faces are available
+These three faces are generated:
+* **Delugia Nerd Font Powerline** _Basic glyphs, monospaced font_
+* **Delugia Nerd Font Complete** _All Nerd Fonts glyphs, monospaced font_
+* **Delugia Nerd Font Book** _All Nerd Fonts glyphs, propotional font (not recommended for coding/console)_
+
 ### How is Delugia special?
 Compared with other patched versions of Cascadia you will find
 * Backtick char `` ` `` working in ligature enabled environments

@@ -10,7 +10,12 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Download latest version of Cascadia
-      run: curl -L https://github.com/microsoft/cascadia-code/releases/latest/download/Cascadia.ttf  --output Cascadia.ttf
+      run: |
+        CASCADIAVERS=`curl -L 'https://github.com/microsoft/cascadia-code/releases/latest' | grep CascadiaCode | sed 's!\(.*/microsoft/cascadia-code/releases/download/\([^"]*\).*\|.*span.*\)!\2!'`
+        echo Downloading ${CASCADIAVERS}
+        curl -L https://github.com/microsoft/cascadia-code/releases/download/${CASCADIAVERS}  -O
+        unzip CascadiaCode*.zip
+        mv **/CascadiaCode.ttf .
     - name: Install FontForge
       run: |
         sudo add-apt-repository ppa:fontforge/fontforge -y -u;
@@ -30,7 +35,7 @@ jobs:
     - name: Build Powerline
       run: |
         fontforge -script font-patcher --careful --powerline --custom SomeExtraSymbols.otf \
-                                       --no-progressbars --mono Cascadia.ttf | tee process.log
+                                       --no-progressbars --mono Cascadia*.ttf | tee process.log
         git describe --always --tags | xargs fontforge rename-font --input Cas*\ Nerd\ Font\ Mono.ttf \
                                                             --output "Delugia Nerd Font.ttf" \
                                                             --name "Delugia Nerd Font" \
@@ -38,7 +43,7 @@ jobs:
     - name: Build Complete
       run: |
         fontforge -script font-patcher --careful -c --custom SomeExtraSymbols.otf \
-                                       --no-progressbars --mono Cascadia.ttf | tee process_full.log
+                                       --no-progressbars --mono Cascadia*.ttf | tee process_full.log
         git describe --always --tags | xargs fontforge rename-font --input Cas*\ Nerd\ Font\ Complete\ Mono.ttf \
                                                             --output "Delugia Nerd Font Complete.ttf" \
                                                             --name "Delugia Nerd Font" \
@@ -46,7 +51,7 @@ jobs:
     - name: Build Book Complete
       run: |
         fontforge -script font-patcher --careful -c --custom SomeExtraSymbols.otf \
-                                       --no-progressbars Cascadia.ttf | tee process_book.log
+                                       --no-progressbars Cascadia*.ttf | tee process_book.log
         git describe --always --tags | xargs fontforge rename-font --input Cas*\ Nerd\ Font\ Complete.ttf \
                                                             --output "Delugia Nerd Font Book.ttf" \
                                                             --name "Delugia Nerd Font Book" \

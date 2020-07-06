@@ -24,10 +24,6 @@ delugia.appendSFNTName("English (US)", "Compatible Full", args.name)
 delugia.appendSFNTName("English (US)", "UniqueID", "{} Regular".format(args.name))
 delugia.appendSFNTName("English (US)", "Trademark", "")
 
-# The grave accent type is somehow not correctly detected;
-# we want it to be an ordinary character
-delugia["grave"].glyphclass="baseglyph"
-
 # Mix our version information in
 delugia.sfntRevision = None # Auto-set (refreshed) by fontforge
 delugia.appendSFNTName("English (US)", "Version", args.version)

@@ -15,7 +15,6 @@ jobs:
         echo Downloading ${CASCADIAVERS}
         curl -L https://github.com/microsoft/cascadia-code/releases/download/${CASCADIAVERS}  -O
         unzip CascadiaCode*.zip
-        mv **/CascadiaCodePL.ttf .
     - name: Install FontForge
       run: |
         sudo add-apt-repository ppa:fontforge/fontforge -y -u;
@@ -32,6 +31,8 @@ jobs:
       run: pip install configparser
     - name: Extract additional powerline glyphs
       run: fontforge -lang=ff -script extract-extra-glyphs
+    - name: Prepare Caskadia Code font file
+      run: fontforge prepare-font --input **/CascadiaCodePL.ttf --output CascadiaCodePL.ttf
     - name: Build Powerline
       run: |
         fontforge -script font-patcher --careful --powerline --custom SomeExtraSymbols.otf \

@@ -1,4 +1,18 @@
+name: Check for new Cascadia version
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    env:
+      NERDFONTVERS: v2.1.0
+    steps:
+    - uses: actions/checkout@v1
+    - name: Download latest version of Cascadia
+      run: |
+        CASCADIAVERS=`curl -L 'https://github.com/microsoft/cascadia-code/releases/latest' | grep CascadiaCode | sed 's!\(.*/microsoft/cascadia-code/releases/download/\([^"]*\).*\|.*span.*\)!\2!'`
+        echo Downloading ${CASCADIAVERS}
+
 on:
   schedule:
-    0 23 * * * 
+    - cron: "5 23 * * *"
    

@@ -14,7 +14,6 @@ jobs:
         CASCADIATAG=`curl --silent "https://api.github.com/repos/microsoft/cascadia-code/releases/latest" | jq -r .tag_name`
         echo ${CASCADIATAG}
         git tag -l -n ${CASCADIATAG}
-        git tag -l | grep ${CASCADIATAG}
 
 # on:
 #   schedule:

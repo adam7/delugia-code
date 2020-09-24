@@ -1,5 +1,7 @@
 name: Check for new Cascadia version
 
+on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-18.04
@@ -12,7 +14,7 @@ jobs:
         CASCADIAVERS=`curl -L 'https://github.com/microsoft/cascadia-code/releases/latest' | grep CascadiaCode | sed 's!\(.*/microsoft/cascadia-code/releases/download/\([^"]*\).*\|.*span.*\)!\2!'`
         echo Downloading ${CASCADIAVERS}
 
-on:
-  schedule:
-    - cron: "5 23 * * *"
+# on:
+#   schedule:
+#     - cron: "5 23 * * *"
    

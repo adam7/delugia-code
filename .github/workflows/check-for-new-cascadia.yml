@@ -9,12 +9,12 @@ jobs:
       NERDFONTVERS: v2.1.0
     steps:
     - uses: actions/checkout@v1
-    - name: Download latest version of Cascadia
+    - name: Find the latest Cascadia release version number
       run: |
-        CASCADIAVERS=`curl -L 'https://github.com/microsoft/cascadia-code/releases/latest' | grep CascadiaCode | sed 's!\(.*/microsoft/cascadia-code/releases/download/\([^"]*\).*\|.*span.*\)!\2!'`
-        echo Downloading ${CASCADIAVERS}
         CASCADIATAG=`curl --silent "https://api.github.com/repos/microsoft/cascadia-code/releases/latest" | jq -r .tag_name`
         echo ${CASCADIATAG}
+        echo git tag -l -n ${CASCADIATAG}
+        echo git tag -l | grep ${CASCADIATAG}
 
 # on:
 #   schedule:

@@ -12,14 +12,13 @@ jobs:
     - name: Find the latest Cascadia release version number
       run: |
         CASCADIATAG=`curl --silent "https://api.github.com/repos/microsoft/cascadia-code/releases/latest" | jq -r .tag_name`
-        echo ${CASCADIATAG}
-        git tag -l -n ${CASCADIATAG}
+        echo "Latest Cascadia tag is ${CASCADIATAG}"         
         if git rev-parse "${CASCADIATAG}" >/dev/null 2>&1; then
           echo "tag ${CASCADIATAG} exists";
         else
-          echo "tag ${CASCADIATAG} does not exist"
+          echo "tag ${CASCADIATAG} does not exist, creating ..."
+          git tag -a ${CASCADIATAG} -m "Version ${CASCADIATAG}"
         fi
-        git tag -l | grep "${CASCADIATAG}"
 
 # on:
 #   schedule:

@@ -14,6 +14,11 @@ jobs:
         CASCADIATAG=`curl --silent "https://api.github.com/repos/microsoft/cascadia-code/releases/latest" | jq -r .tag_name`
         echo ${CASCADIATAG}
         git tag -l -n ${CASCADIATAG}
+        if git rev-parse "${CASCADIATAG}" >/dev/null 2>&1; then
+          echo "tag ${CASCADIATAG} exists";
+        else
+          echo "tag ${CASCADIATAG} does not exist"
+        fi
         git tag -l | grep "${CASCADIATAG}"
 
 # on:

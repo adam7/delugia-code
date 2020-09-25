@@ -6,13 +6,14 @@ jobs:
   build:
     runs-on: ubuntu-18.04
     env:
-      NERDFONTVERS: v2.1.0
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
     - uses: actions/checkout@v1
     - name: Find the latest Cascadia release version number
       run: |
         CASCADIATAG=`curl --silent "https://api.github.com/repos/microsoft/cascadia-code/releases/latest" | jq -r .tag_name`
-        echo "Latest Cascadia tag is ${CASCADIATAG}"         
+        echo "Latest Cascadia tag is ${CASCADIATAG}"    
+        git tag -l -n     
         if git rev-parse "${CASCADIATAG}" >/dev/null 2>&1; then
           echo "tag ${CASCADIATAG} exists";
         else

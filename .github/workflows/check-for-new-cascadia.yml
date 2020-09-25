@@ -13,9 +13,7 @@ jobs:
       run: |
         CASCADIATAG=`curl --silent "https://api.github.com/repos/microsoft/cascadia-code/releases/latest" | jq -r .tag_name`
         echo "Latest Cascadia tag is ${CASCADIATAG}"    
-        git tag -l -n     
-    - name: Create a new tag if we need one
-      run: |
+        git tag -l -n
         if git rev-parse "${CASCADIATAG}" >/dev/null 2>&1; then
           echo "${CASCADIATAG} tag exists";
         else

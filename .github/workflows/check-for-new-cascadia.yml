@@ -14,13 +14,15 @@ jobs:
         CASCADIATAG=`curl --silent "https://api.github.com/repos/microsoft/cascadia-code/releases/latest" | jq -r .tag_name`
         echo "Latest Cascadia tag is ${CASCADIATAG}"    
         git tag -l -n     
+    - name: Create a new tag if we need one
+      run: |
         if git rev-parse "${CASCADIATAG}" >/dev/null 2>&1; then
-          echo "tag ${CASCADIATAG} exists";
+          echo "${CASCADIATAG} tag exists";
         else
-          echo "tag ${CASCADIATAG} does not exist, creating ..."
+          echo "${CASCADIATAG} tag does not exist, creating it ..."
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git tag -a ${CASCADIATAG} -m "Bump Cascadia version to ${CASCADIATAG}"
+          git tag -a ${CASCADIATAG} -m "Bump Cascadia version to ${CASCADIATAG}"          
         fi
 
 # on:

@@ -7,7 +7,8 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2
-    - run: |
+    - name: Magic ...
+      run: |
         # Find the latest Cascadia tag
         CASCADIATAG=`curl --silent "https://api.github.com/repos/microsoft/cascadia-code/releases/latest" | jq -r .tag_name`
         echo "Latest Cascadia tag is ${CASCADIATAG}"    

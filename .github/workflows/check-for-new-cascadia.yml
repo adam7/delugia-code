@@ -20,7 +20,8 @@ jobs:
           echo "${CASCADIATAG} tag does not exist, creating it ..."
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git tag -a ${CASCADIATAG} -m "Bump Cascadia version to ${CASCADIATAG}"          
+          git tag -a ${CASCADIATAG} -m "Bump Cascadia version to ${CASCADIATAG}"    
+          git push origin master      
         fi
 
 # on:

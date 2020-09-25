@@ -1,4 +1,4 @@
-name: Check for new Cascadia version
+name: Create tag if there's a new Cascadia version
 
 on: [push]
 
@@ -7,11 +7,13 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2
-    - name: Find the latest Cascadia release version number
+    - name: Check
       run: |
+        # Find the latest Cascadia tag
         CASCADIATAG=`curl --silent "https://api.github.com/repos/microsoft/cascadia-code/releases/latest" | jq -r .tag_name`
         echo "Latest Cascadia tag is ${CASCADIATAG}"    
-        git tag -l -n
+        
+        # Create a new Delugia tag if needed
         if git rev-parse "${CASCADIATAG}" >/dev/null 2>&1; then
           echo "${CASCADIATAG} tag exists";
         else

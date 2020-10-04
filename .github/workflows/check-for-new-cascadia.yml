@@ -1,6 +1,8 @@
 name: Create tag if there's a new Cascadia version
 
-on: [push]
+on:
+  schedule:
+    - cron: "5 23 * * *"
 
 jobs:
   build:
@@ -24,9 +26,4 @@ jobs:
           git config user.email github-actions@github.com
           git tag -a ${CASCADIATAG} -m "Bump Cascadia version to ${CASCADIATAG}"    
           git push origin --tags
-        fi
-
-# on:
-#   schedule:
-#     - cron: "5 23 * * *"
-   
+        fi  

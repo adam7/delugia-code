@@ -1,0 +1,29 @@
+name: Create tag if there's a new Cascadia version
+
+on:
+  schedule:
+    - cron: "5 23 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2        
+      with:
+        token: ${{ secrets.DELUGIA_ACCESS_TOKEN }}
+    - name: Magic 🐇
+      run: |
+        # Find the latest Cascadia tag
+        CASCADIATAG=`curl --silent "https://api.github.com/repos/microsoft/cascadia-code/releases/latest" | jq -r .tag_name`
+        echo "Latest Cascadia tag is ${CASCADIATAG}"    
+        
+        # Check if we already have a matching tag
+        if git rev-parse "${CASCADIATAG}" >/dev/null 2>&1; then
+          echo "${CASCADIATAG} tag exists";
+        else
+          echo "${CASCADIATAG} tag does not exist, creating it ..."
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git tag -a ${CASCADIATAG} -m "Bump Cascadia version to ${CASCADIATAG}"    
+          git push origin --tags
+        fi  

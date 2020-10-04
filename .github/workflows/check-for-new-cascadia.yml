@@ -6,14 +6,16 @@ jobs:
   build:
     runs-on: ubuntu-18.04
     steps:
-    - uses: actions/checkout@v2
-    - name: Magic ...
+    - uses: actions/checkout@v2        
+      with:
+        token: ${{ secrets.DELUGIA_ACCESS_TOKEN }}
+    - name: Magic 🐇
       run: |
         # Find the latest Cascadia tag
         CASCADIATAG=`curl --silent "https://api.github.com/repos/microsoft/cascadia-code/releases/latest" | jq -r .tag_name`
         echo "Latest Cascadia tag is ${CASCADIATAG}"    
         
-        # Create a new Delugia tag if needed
+        # Check if we already have a matching tag
         if git rev-parse "${CASCADIATAG}" >/dev/null 2>&1; then
           echo "${CASCADIATAG} tag exists";
         else

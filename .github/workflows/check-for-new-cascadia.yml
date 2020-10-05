@@ -2,7 +2,7 @@ name: Create tag if there's a new Cascadia version
 
 on:
   schedule:
-    - cron: "45 8 * * *"
+    - cron: "30 20 * * *"
 
 jobs:
   build:

@@ -39,7 +39,7 @@ _Complete_ includes these symbols additionally:
 These three faces are generated:
 * **Delugia Nerd Font Powerline** _Basic glyphs, monospaced font_
 * **Delugia Nerd Font Complete** _All Nerd Fonts glyphs, monospaced font_
-* **Delugia Nerd Font Book** _All Nerd Fonts glyphs, propotional font (not recommended for coding/console)_
+* **Delugia Nerd Font Book** _All Nerd Fonts glyphs, proportional font (not recommended for coding/console)_
 
 ### How is Delugia special?
 Compared with other patched versions of Cascadia you will find

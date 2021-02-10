@@ -31,31 +31,51 @@ jobs:
       run: pip install configparser
     - name: Extract additional powerline glyphs
       run: fontforge -lang=ff -script extract-extra-glyphs
-    - name: Prepare Caskadia Code font file
-      run: fontforge prepare-font --input **/CascadiaCodePL.ttf --output CascadiaCodePL.ttf
+    - name: Prepare Cascadia Code font file
+      run: |
+        fontforge prepare-font --input ttf/CascadiaCodePL.ttf --output CascadiaCodePL.ttf
+        fontforge prepare-font --input ttf/CascadiaMonoPL.ttf --output CascadiaMonoPL.ttf
     - name: Build Powerline
       run: |
         fontforge -script font-patcher --careful --powerline --custom SomeExtraSymbols.otf \
-                                       --no-progressbars --mono Cascadia*.ttf | tee process.log
-        git describe --always --tags | xargs fontforge rename-font --input Cas*\ Nerd\ Font\ Mono.ttf \
+                                       --no-progressbars --mono CascadiaCodePL.ttf | tee process.log
+        git describe --always --tags | xargs fontforge rename-font --input "Caskaydia Cove PL Regular Nerd Font Mono.ttf" \
                                                             --output "Delugia Nerd Font.ttf" \
                                                             --name "Delugia Nerd Font" \
+                                                            --version
+        fontforge -script font-patcher --careful --powerline --custom SomeExtraSymbols.otf \
+                                       --no-progressbars --mono CascadiaMonoPL.ttf | tee process.log
+        git describe --always --tags | xargs fontforge rename-font --input "Cascadia Mono PL Regular Nerd Font Mono.ttf" \
+                                                            --output "Delugia Mono Nerd Font.ttf" \
+                                                            --name "Delugia Mono Nerd Font" \
                                                             --version
     - name: Build Complete
       run: |
         fontforge -script font-patcher --careful -c --custom SomeExtraSymbols.otf \
-                                       --no-progressbars --mono Cascadia*.ttf | tee process_full.log
-        git describe --always --tags | xargs fontforge rename-font --input Cas*\ Nerd\ Font\ Complete\ Mono.ttf \
+                                       --no-progressbars --mono CascadiaCodePL.ttf | tee process_full.log
+        git describe --always --tags | xargs fontforge rename-font --input "Caskaydia Cove PL Regular Nerd Font Complete Mono.ttf" \
                                                             --output "Delugia Nerd Font Complete.ttf" \
                                                             --name "Delugia Nerd Font" \
+                                                            --version
+        fontforge -script font-patcher --careful -c --custom SomeExtraSymbols.otf \
+                                       --no-progressbars --mono CascadiaMonoPL.ttf | tee process_full.log
+        git describe --always --tags | xargs fontforge rename-font --input "Cascadia Mono PL Regular Nerd Font Complete Mono.ttf" \
+                                                            --output "Delugia Mono Nerd Font Complete.ttf" \
+                                                            --name "Delugia Mono Nerd Font" \
                                                             --version
     - name: Build Book Complete
       run: |
         fontforge -script font-patcher --careful -c --custom SomeExtraSymbols.otf \
-                                       --no-progressbars Cascadia*.ttf | tee process_book.log
-        git describe --always --tags | xargs fontforge rename-font --input Cas*\ Nerd\ Font\ Complete.ttf \
+                                       --no-progressbars CascadiaCodePL.ttf | tee process_book.log
+        git describe --always --tags | xargs fontforge rename-font --input "Caskaydia Cove PL Regular Nerd Font Complete.ttf" \
                                                             --output "Delugia Nerd Font Book.ttf" \
                                                             --name "Delugia Nerd Font Book" \
+                                                            --version
+        fontforge -script font-patcher --careful -c --custom SomeExtraSymbols.otf \
+                                       --no-progressbars CascadiaMonoPL.ttf | tee process_book.log
+        git describe --always --tags | xargs fontforge rename-font --input "Cascadia Mono PL Regular Nerd Font Complete.ttf" \
+                                                            --output "Delugia Mono Nerd Font Book.ttf" \
+                                                            --name "Delugia Mono Nerd Font Book" \
                                                             --version
     - name: Check for preexisting glyphs
       run: |
@@ -72,6 +92,18 @@ jobs:
       with:
         name: Delugia Nerd Font Book
         path: "Delugia Nerd Font Book.ttf"
+    - uses: actions/upload-artifact@master
+      with:
+        name: Delugia Mono Nerd Font Powerline
+        path: "Delugia Mono Nerd Font.ttf"
+    - uses: actions/upload-artifact@master
+      with:
+        name: Delugia Mono Nerd Font Complete
+        path: "Delugia Mono Nerd Font Complete.ttf"
+    - uses: actions/upload-artifact@master
+      with:
+        name: Delugia Mono Nerd Font Book
+        path: "Delugia Mono Nerd Font Book.ttf"
     - name: Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
@@ -80,5 +112,8 @@ jobs:
           Delugia Nerd Font.ttf
           Delugia Nerd Font Complete.ttf
           Delugia Nerd Font Book.ttf
+          Delugia Mono Nerd Font.ttf
+          Delugia Mono Nerd Font Complete.ttf
+          Delugia Mono Nerd Font Book.ttf
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

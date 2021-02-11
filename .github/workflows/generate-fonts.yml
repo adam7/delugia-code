@@ -39,7 +39,7 @@ jobs:
       run: |
         fontforge -script font-patcher --careful --powerline --custom SomeExtraSymbols.otf \
                                        --no-progressbars --mono CascadiaCodePL.ttf | tee process.log
-        git describe --always --tags | xargs fontforge rename-font --input "Caskaydia Cove PL Regular Nerd Font Mono.ttf" \
+        git describe --always --tags | xargs fontforge rename-font --input Cas*\ Nerd\ Font\ Mono.ttf \
                                                             --output "Delugia Nerd Font.ttf" \
                                                             --name "Delugia Nerd Font" \
                                                             --version
@@ -53,7 +53,7 @@ jobs:
       run: |
         fontforge -script font-patcher --careful -c --custom SomeExtraSymbols.otf \
                                        --no-progressbars --mono CascadiaCodePL.ttf | tee process_full.log
-        git describe --always --tags | xargs fontforge rename-font --input "Caskaydia Cove PL Regular Nerd Font Complete Mono.ttf" \
+        git describe --always --tags | xargs fontforge rename-font --input Cas*\ Nerd\ Font\ Complete\ Mono.ttf \
                                                             --output "Delugia Nerd Font Complete.ttf" \
                                                             --name "Delugia Nerd Font" \
                                                             --version
@@ -67,7 +67,7 @@ jobs:
       run: |
         fontforge -script font-patcher --careful -c --custom SomeExtraSymbols.otf \
                                        --no-progressbars CascadiaCodePL.ttf | tee process_book.log
-        git describe --always --tags | xargs fontforge rename-font --input "Caskaydia Cove PL Regular Nerd Font Complete.ttf" \
+        git describe --always --tags | xargs fontforge rename-font --input Cas*\ Nerd\ Font\ Complete.ttf \
                                                             --output "Delugia Nerd Font Book.ttf" \
                                                             --name "Delugia Nerd Font Book" \
                                                             --version

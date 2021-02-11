@@ -71,12 +71,6 @@ jobs:
                                                             --output "Delugia Nerd Font Book.ttf" \
                                                             --name "Delugia Nerd Font Book" \
                                                             --version
-        fontforge -script font-patcher --careful -c --custom SomeExtraSymbols.otf \
-                                       --no-progressbars CascadiaMonoPL.ttf | tee process_book.log
-        git describe --always --tags | xargs fontforge rename-font --input "Cascadia Mono PL Regular Nerd Font Complete.ttf" \
-                                                            --output "Delugia Mono Nerd Font Book.ttf" \
-                                                            --name "Delugia Mono Nerd Font Book" \
-                                                            --version
     - name: Check for preexisting glyphs
       run: |
         grep 'Found existing' process*.log
@@ -100,10 +94,6 @@ jobs:
       with:
         name: Delugia Mono Nerd Font Complete
         path: "Delugia Mono Nerd Font Complete.ttf"
-    - uses: actions/upload-artifact@master
-      with:
-        name: Delugia Mono Nerd Font Book
-        path: "Delugia Mono Nerd Font Book.ttf"
     - name: Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
@@ -114,6 +104,5 @@ jobs:
           Delugia Nerd Font Book.ttf
           Delugia Mono Nerd Font.ttf
           Delugia Mono Nerd Font Complete.ttf
-          Delugia Mono Nerd Font Book.ttf
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

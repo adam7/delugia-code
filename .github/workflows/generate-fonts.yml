@@ -45,7 +45,7 @@ jobs:
                                                             --version
         fontforge -script font-patcher --careful --powerline --custom SomeExtraSymbols.otf \
                                        --no-progressbars --mono CascadiaMonoPL.ttf | tee process_mono.log
-        git describe --always --tags | xargs fontforge rename-font --input "Cascadia Mono PL Regular Nerd Font Mono.ttf" \
+        git describe --always --tags | xargs fontforge rename-font --input "Cascadia Mono PL Nerd Font Mono.ttf" \
                                                             --output "Delugia Mono Nerd Font.ttf" \
                                                             --name "Delugia Mono Nerd Font" \
                                                             --version
@@ -59,7 +59,7 @@ jobs:
                                                             --version
         fontforge -script font-patcher --careful -c --custom SomeExtraSymbols.otf \
                                        --no-progressbars --mono CascadiaMonoPL.ttf | tee process_mono_full.log
-        git describe --always --tags | xargs fontforge rename-font --input "Cascadia Mono PL Regular Nerd Font Complete Mono.ttf" \
+        git describe --always --tags | xargs fontforge rename-font --input "Cascadia Mono PL Nerd Font Complete Mono.ttf" \
                                                             --output "Delugia Mono Nerd Font Complete.ttf" \
                                                             --name "Delugia Mono Nerd Font" \
                                                             --version

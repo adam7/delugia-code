@@ -36,10 +36,16 @@ _Complete_ includes these symbols additionally:
 * [Octicons](https://github.com/github/octicons)
 
 ### Which font faces are available
-These three faces are generated:
+Cascadia now bundles a version without ligatures, called Cascadia Mono, in addition to Cascadia Code which has ligatures.
+
+These three faces are generated from Cascadia Code:
 * **Delugia Nerd Font Powerline** _Basic glyphs, monospaced font_
 * **Delugia Nerd Font Complete** _All Nerd Fonts glyphs, monospaced font_
 * **Delugia Nerd Font Book** _All Nerd Fonts glyphs, proportional font (not recommended for coding/console)_
+
+And the following two faces are generated from Cascadia Mono and don't have ligatures:
+* **Delugia Mono Nerd Font Powerline** _Basic glyphs, monospaced font_
+* **Delugia Mono Nerd Font Complete** _All Nerd Fonts glyphs, monospaced font_
 
 ### How is Delugia special?
 Compared with other patched versions of Cascadia you will find

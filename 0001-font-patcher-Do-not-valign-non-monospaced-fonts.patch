@@ -1,0 +1,48 @@
+From 427f950115135c3ea76c3b2d46105170e258c14d Mon Sep 17 00:00:00 2001
+From: Fini Jastrow <ulf.fini.jastrow@desy.de>
+Date: Sun, 14 Mar 2021 21:53:06 +0100
+Subject: [PATCH] font-patcher: Do not valign non-monospaced fonts
+
+[why]
+When glyphs are added to a monospaced font and these glyphs are bigger
+symbols (like on-off or logos) they need to be scaled down quite a bit
+(for normal target fonts that are higher than wide).
+These tiny symbols are then centered within the complete vertical hight
+(descent to ascent) to have them centered on the powerline triangle
+tips.
+
+When a non-monospace font is generated the symbols are not tiny anymore
+and often it is visually more pleasing to put them where they were
+intended to be put relative to the baseline - because usually the source
+fonts are well designed enough.
+
+[how]
+Do a vertical shift only on monospaced output fonts.
+
+This is in accordance with the line 711 comment:
+    # Now that we have copy/pasted the glyph, if we are creating a monospace
+    # font we need to scale and move the glyphs.
+
+-> Not scale and MOVE when non-monospaced.
+
+Signed-off-by: Fini Jastrow <ulf.fini.jastrow@desy.de>
+---
+ font-patcher | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/font-patcher b/font-patcher
+index aa701ce5..f1a99b36 100755
+--- a/font-patcher
++++ b/font-patcher
+@@ -750,7 +750,7 @@ class font_patcher:
+             # Use the dimensions from the newly pasted and stretched glyph
+             sym_dim = get_glyph_dimensions(self.sourceFont[currentSourceFontGlyph])
+             y_align_distance = 0
+-            if sym_attr['valign'] == 'c':
++            if self.args.single and sym_attr['valign'] == 'c':
+                 # Center the symbol vertically by matching the center of the line height and center of symbol
+                 sym_ycenter = sym_dim['ymax'] - (sym_dim['height'] / 2)
+                 font_ycenter = self.font_dim['ymax'] - (self.font_dim['height'] / 2)
+-- 
+2.27.0
+

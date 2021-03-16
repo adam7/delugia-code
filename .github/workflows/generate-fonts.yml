@@ -19,8 +19,10 @@ jobs:
       run: |
         sudo add-apt-repository ppa:fontforge/fontforge -y -u;
         sudo apt-get install fontforge -y;
-    - name: Download Font Patcher
-      run: curl -L https://raw.githubusercontent.com/ryanoasis/nerd-fonts/${NERDFONTVERS}/font-patcher --output font-patcher
+    - name: Download and patch Font Patcher
+      run: |
+        curl -L https://raw.githubusercontent.com/ryanoasis/nerd-fonts/${NERDFONTVERS}/font-patcher --output font-patcher
+        patch font-patcher 0001*.patch
     - name: Download source fonts
       run: |
         chmod +x download-source-fonts.sh

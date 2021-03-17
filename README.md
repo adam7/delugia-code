@@ -50,6 +50,7 @@ And the following two faces are generated from Cascadia Mono and don't have liga
 ### How is Delugia special?
 Compared with other patched versions of Cascadia you will find
 * Added symbols ``≢`` (0u2262), ``≣`` (0u2263), ``❯`` (0u276F), and ``⚡`` (0u26A1) used with some popular Powerline setups
+* All added symbols centered on visual middle of the font (not a bit higher)
 
 ### How to use
 You can download the patched font from the [Releases page](https://github.com/adam7/delugia-code/releases) of this repo and install them as you would any other font. Once installed the font can be referenced as `Delugia Nerd Font`. So if, for example, you want to use it in Windows Terminal you should add this line to your profiles.json

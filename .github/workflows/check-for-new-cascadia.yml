@@ -6,25 +6,45 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v2        
+    - uses: octokit/request-action@v2.x
+      id: get_latest_release
       with:
-        token: ${{ secrets.DELUGIA_ACCESS_TOKEN }}
-        fetch-depth: 0
-    - name: Magic 🐇
-      run: |
-        # Find the latest Cascadia tag
-        CASCADIATAG=`curl --silent "https://api.github.com/repos/microsoft/cascadia-code/releases/latest" | jq -r .tag_name`
-        echo "Latest Cascadia tag is ${CASCADIATAG}"    
-        
-        # Check if we already have a matching tag
-        if git rev-parse "$CASCADIATAG" >/dev/null 2>&1; then
-          echo "${CASCADIATAG} tag exists";
-        else
-          echo "${CASCADIATAG} tag does not exist, creating it ..."
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git tag -a ${CASCADIATAG} -m "Bump Cascadia version to ${CASCADIATAG}"    
-          git push origin --tags
-        fi  
+        route: GET /repos/{owner}/{repo}/releases/latest
+        owner: microsoft
+        repo: cascadia-code
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Find the latest Cascadia tag
+      run: echo "CASCADIATAG=${{ fromJson(steps.get_latest_release.outputs.data).tag_name }}" >> $GITHUB_ENV
+    - name: Latest Cascadia tag is ${{ env.CASCADIATAG }}
+      run: echo "Latest Cascadia tag is ${{ env.CASCADIATAG }}"
+    - name: Check if tag exists
+      uses: mukunku/tag-exists-action@v1.0.0
+      id: check_tag
+      with: 
+        tag: ${{ env.CASCADIATAG }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Create tag
+      if: ${{ steps.check_tag.outputs.exists != 'true' }}
+      uses: actions/github-script@v3
+      with:
+        github-token: ${{ github.token }}
+        script: |
+          const createdTag = await github.git.createTag({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            tag: "${{ env.CASCADIATAG }}",
+            message: "Bump Cascadia version to ${{ env.CASCADIATAG }}",
+            object: context.sha,
+            type: "commit"
+          })
+          
+          github.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/${{ env.CASCADIATAG }}",
+              sha: createdTag.data.sha
+          })

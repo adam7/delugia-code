@@ -8,7 +8,8 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
-    - uses: octokit/request-action@v2.x
+    - name: Fetch latest release of Cascadia Code
+      uses: octokit/request-action@v2.x
       id: get_latest_release
       with:
         route: GET /repos/{owner}/{repo}/releases/latest
@@ -16,10 +17,10 @@ jobs:
         repo: cascadia-code
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Find the latest Cascadia tag
-      run: echo "CASCADIATAG=${{ fromJson(steps.get_latest_release.outputs.data).tag_name }}" >> $GITHUB_ENV
-    - name: Latest Cascadia tag is ${{ env.CASCADIATAG }}
-      run: echo "Latest Cascadia tag is ${{ env.CASCADIATAG }}"
+    - name: Get the latest Cascadia tag
+      run: |
+        echo "CASCADIATAG=${{ fromJson(steps.get_latest_release.outputs.data).tag_name }}" >> $GITHUB_ENV
+        echo "Latest Cascadia tag is ${{ env.CASCADIATAG }}"
     - name: Check if tag exists
       uses: mukunku/tag-exists-action@v1.0.0
       id: check_tag

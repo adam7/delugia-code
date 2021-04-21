@@ -1,14 +1,55 @@
-name: Generate Fonts
+name: ci
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - master
+  schedule:
+    - cron: "0 13 * * *"
 
 jobs:
-  build:
+  check-for-new-cascadia:
+    runs-on: ubuntu-20.04
+    outputs:
+      tag_name: ${{ env.CASCADIATAG }}
+      tag_exists: ${{ steps.check_tag.outputs.exists }}
+  
+    steps:
+    - name: Fetch latest release of Cascadia Code
+      uses: octokit/request-action@v2.x
+      id: get_latest_release
+      with:
+        route: GET /repos/{owner}/{repo}/releases/latest
+        owner: microsoft
+        repo: cascadia-code
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Get the latest Cascadia tag
+      run: |
+        echo "CASCADIATAG=${{ fromJson(steps.get_latest_release.outputs.data).tag_name }}" >> $GITHUB_ENV
+        echo "Latest Cascadia tag is ${{ env.CASCADIATAG }}"
+    - name: Check if tag exists
+      uses: mukunku/tag-exists-action@v1.0.0
+      id: check_tag
+      with: 
+        tag: ${{ env.CASCADIATAG }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+  build-and-release:
+    needs: check-for-new-cascadia
+    if: ${{ github.event_name != 'schedule' || needs.check-for-new-cascadia.outputs.tag_exists != 'true' }}
     runs-on: ubuntu-18.04
     env:
       NERDFONTVERS: v2.1.0
+
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Download latest version of Cascadia
       run: |
         CASCADIAVERS=`curl -L 'https://github.com/microsoft/cascadia-code/releases/latest' | grep CascadiaCode | sed 's!\(.*/microsoft/cascadia-code/releases/download/\([^"]*\).*\|.*span.*\)!\2!'`
@@ -102,10 +143,40 @@ jobs:
       with:
         name: Delugia Mono Nerd Font Complete
         path: "Delugia Mono Nerd Font Complete.ttf"
+
+    # Release part
+    - name: Create tag
+      if: ${{ github.event_name != 'pull_request' && !startsWith(github.ref, 'refs/tags/') && needs.check-for-new-cascadia.outputs.tag_exists != 'true' }}
+      uses: actions/github-script@v3
+      with:
+        github-token: ${{ github.token }}
+        script: |
+          const tagName = "${{ needs.check-for-new-cascadia.outputs.tag_name }}";
+
+          const createdTag = await github.git.createTag({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            tag: tagName,
+            message: `Bump Cascadia version to ${tagName}`,
+            object: context.sha,
+            type: "commit"
+          })
+          
+          github.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: `refs/tags/${tagName}`,
+              sha: createdTag.data.sha
+          })
+    - name: Get tag name
+      id: get_tag_name
+      if: ${{ startsWith(github.ref, 'refs/tags/') }}
+      uses: battila7/get-version-action@v2
     - name: Release
       uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/')
+      if: ${{ github.event_name != 'pull_request' && (startsWith(github.ref, 'refs/tags/') || needs.check-for-new-cascadia.outputs.tag_exists != 'true') }}
       with:
+        tag_name: ${{ startsWith(github.ref, 'refs/tags/') && steps.get_tag_name.outputs.version || needs.check-for-new-cascadia.outputs.tag_name }}
         files: |
           Delugia Nerd Font.ttf
           Delugia Nerd Font Complete.ttf

@@ -74,11 +74,6 @@ jobs:
       run: pip install configparser
     - name: Extract additional powerline glyphs
       run: fontforge -lang=ff -script extract-extra-glyphs
-    - name: Prepare Cascadia Code font file
-      run: |
-        mkdir prepared
-        fontforge prepare-font --input ttf/CascadiaCodePL.ttf --output prepared/CascadiaCodePL.ttf
-        fontforge prepare-font --input ttf/CascadiaMonoPL.ttf --output prepared/CascadiaMonoPL.ttf
     - name: Build Powerline
       run: |
         ./do_generate 01 --powerline --mono CascadiaCodePL-Regular.ttf            DelugiaPowerline.ttf                        "Delugia PL"                   "Regular"

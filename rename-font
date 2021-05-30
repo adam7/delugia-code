@@ -9,19 +9,23 @@ parser = ArgumentParser()
 parser.add_argument("--input", help="input file name")
 parser.add_argument("--output", help="output file name")
 parser.add_argument("--name", help="font name")
+parser.add_argument("--style", help="font sub-style")
 parser.add_argument("--version", help="text to add to the existing version")
 args = parser.parse_args()
+
+if args.style:
+    args.style = " " + args.style
 
 # Open the file
 delugia=fontforge.open(args.input)
 
 # Rename the file
-delugia.fontname="{}-Regular".format(args.name).replace(" ", "")
+delugia.fontname="{}{}".format(args.name, args.style).replace(" ", "")
 delugia.familyname=args.name
 delugia.fullname=args.name
 delugia.appendSFNTName("English (US)", "Preferred Family", args.name)
 delugia.appendSFNTName("English (US)", "Compatible Full", args.name)
-delugia.appendSFNTName("English (US)", "UniqueID", "{} Regular".format(args.name))
+delugia.appendSFNTName("English (US)", "UniqueID", "{}{}".format(args.name, args.style))
 delugia.appendSFNTName("English (US)", "Trademark", "")
 
 # Mix our version information in
@@ -31,4 +35,4 @@ delugia.version = args.version
 
 # Save
 delugia.generate(args.output)
-print("Generated '{}' from {} version {}".format(args.output, args.name, args.version))
+print("Generated '{}' from {}{} version {}".format(args.output, args.name, args.style, args.version))

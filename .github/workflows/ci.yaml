@@ -78,46 +78,46 @@ jobs:
       run: fontforge -lang=ff -script extract-extra-glyphs
     - name: Build Powerline
       run: |
-        ./do_generate 01 --powerline --mono CascadiaCodePL-Regular.ttf            DelugiaPowerline.ttf                        "Delugia PL"                   "Regular"
-        ./do_generate 02 --powerline --mono CascadiaCodePL-Bold.ttf               DelugiaPowerline-Bold.ttf                   "Delugia PL"                   "Bold"
-        ./do_generate 03 --powerline --mono CascadiaCodePL-Light.ttf              DelugiaPowerline-Light.ttf                  "Delugia PL Light"             ""
-        ./do_generate 04 --powerline --mono CascadiaCodePLItalic-Italic.ttf       DelugiaPowerlineItalic-Italic.ttf           "Delugia PL Italic"            "Italic"
-        ./do_generate 05 --powerline --mono CascadiaCodePLItalic-BoldItalic.ttf   DelugiaPowerlineItalic-BoldItalic.ttf       "Delugia PL Italic"            "Bold Italic"
-        ./do_generate 06 --powerline --mono CascadiaCodePLItalic-LightItalic.ttf  DelugiaPowerlineItalic-LightItalic.ttf      "Delugia PL Italic Light"      "Italic"
-        ./do_generate 11 --powerline --mono CascadiaMonoPL-Regular.ttf            DelugiaMonoPowerline.ttf                    "Delugia PL Mono"              "Regular"
-        ./do_generate 12 --powerline --mono CascadiaMonoPL-Bold.ttf               DelugiaMonoPowerline-Bold.ttf               "Delugia PL Mono"              "Bold"
-        ./do_generate 13 --powerline --mono CascadiaMonoPL-Light.ttf              DelugiaMonoPowerline-Light.ttf              "Delugia PL Mono Light"        ""
-        ./do_generate 14 --powerline --mono CascadiaMonoPLItalic-Italic.ttf       DelugiaMonoPowerlineItalic-Italic.ttf       "Delugia PL Mono Italic"       "Italic"
-        ./do_generate 15 --powerline --mono CascadiaMonoPLItalic-BoldItalic.ttf   DelugiaMonoPowerlineItalic-BoldItalic.ttf   "Delugia PL Mono Italic"       "Bold Italic"
-        ./do_generate 16 --powerline --mono CascadiaCodePLItalic-LightItalic.ttf  DelugiaMonoPowerlineItalic-LightItalic.ttf  "Delugia PL Mono Italic Light" "Italic"
+        ./do_generate 01 --powerline --mono CascadiaCodePL-Regular.ttf            DelugiaPL.ttf                  "Delugia PL"            "Regular"
+        ./do_generate 02 --powerline --mono CascadiaCodePL-Bold.ttf               DelugiaPL-Bold.ttf             "Delugia PL"            "Bold"
+        ./do_generate 03 --powerline --mono CascadiaCodePLItalic-Italic.ttf       DelugiaPL-Italic.ttf           "Delugia PL"            "Italic"
+        ./do_generate 04 --powerline --mono CascadiaCodePLItalic-BoldItalic.ttf   DelugiaPL-BoldItalic.ttf       "Delugia PL"            "Bold Italic"
+        ./do_generate 05 --powerline --mono CascadiaCodePL-Light.ttf              DelugiaPLLight.ttf             "Delugia PL Light"      ""
+        ./do_generate 06 --powerline --mono CascadiaCodePLItalic-LightItalic.ttf  DelugiaPLLight-Italic.ttf      "Delugia PL Light"      "Italic"
+        ./do_generate 11 --powerline --mono CascadiaMonoPL-Regular.ttf            DelugiaMonoPL.ttf              "Delugia PL Mono"       "Regular"
+        ./do_generate 12 --powerline --mono CascadiaMonoPL-Bold.ttf               DelugiaMonoPL-Bold.ttf         "Delugia PL Mono"       "Bold"
+        ./do_generate 13 --powerline --mono CascadiaMonoPLItalic-Italic.ttf       DelugiaMonoPL-Italic.ttf       "Delugia PL Mono"       "Italic"
+        ./do_generate 14 --powerline --mono CascadiaMonoPLItalic-BoldItalic.ttf   DelugiaMonoPL-BoldItalic.ttf   "Delugia PL Mono"       "Bold Italic"
+        ./do_generate 15 --powerline --mono CascadiaMonoPL-Light.ttf              DelugiaMonoPLLight.ttf         "Delugia PL Mono Light" ""
+        ./do_generate 16 --powerline --mono CascadiaCodePLItalic-LightItalic.ttf  DelugiaMonoPLLight-Italic.ttf  "Delugia PL Mono Light" "Italic"
         mkdir delugia-powerline
         mv Delugia*ttf delugia-powerline
         zip delugia-powerline.zip delugia-powerline/*
     - name: Build Complete
       run: |
-        ./do_generate 21 -c --mono CascadiaCodePL-Regular.ttf            DelugiaComplete.ttf                        "Delugia"                   "Regular"
-        ./do_generate 22 -c --mono CascadiaCodePL-Bold.ttf               DelugiaComplete-Bold.ttf                   "Delugia"                   "Bold"
-        ./do_generate 23 -c --mono CascadiaCodePL-Light.ttf              DelugiaComplete-Light.ttf                  "Delugia Light"             ""
-        ./do_generate 24 -c --mono CascadiaCodePLItalic-Italic.ttf       DelugiaCompleteItalic-Italic.ttf           "Delugia Italic"            "Italic"
-        ./do_generate 25 -c --mono CascadiaCodePLItalic-BoldItalic.ttf   DelugiaCompleteItalic-BoldItalic.ttf       "Delugia Italic"            "Bold Italic"
-        ./do_generate 26 -c --mono CascadiaCodePLItalic-LightItalic.ttf  DelugiaCompleteItalic-LightItalic.ttf      "Delugia Italic Light"      "Italic"
-        ./do_generate 31 -c --mono CascadiaMonoPL-Regular.ttf            DelugiaMonoComplete.ttf                    "Delugia Mono"              "Regular"
-        ./do_generate 32 -c --mono CascadiaMonoPL-Bold.ttf               DelugiaMonoComplete-Bold.ttf               "Delugia Mono"              "Bold"
-        ./do_generate 33 -c --mono CascadiaMonoPL-Light.ttf              DelugiaMonoComplete-Light.ttf              "Delugia Mono Light"        ""
-        ./do_generate 34 -c --mono CascadiaMonoPLItalic-Italic.ttf       DelugiaMonoCompleteItalic-Italic.ttf       "Delugia Mono Italic"       "Italic"
-        ./do_generate 35 -c --mono CascadiaMonoPLItalic-BoldItalic.ttf   DelugiaMonoCompleteItalic-BoldItalic.ttf   "Delugia Mono Italic"       "Bold Italic"
-        ./do_generate 36 -c --mono CascadiaCodePLItalic-LightItalic.ttf  DelugiaMonoCompleteItalic-LightItalic.ttf  "Delugia Mono Italic Light" "Italic"
+        ./do_generate 21 -c --mono CascadiaCodePL-Regular.ttf            DelugiaComplete.ttf                  "Delugia"            "Regular"
+        ./do_generate 22 -c --mono CascadiaCodePL-Bold.ttf               DelugiaComplete-Bold.ttf             "Delugia"            "Bold"
+        ./do_generate 23 -c --mono CascadiaCodePLItalic-Italic.ttf       DelugiaComplete-Italic.ttf           "Delugia"            "Italic"
+        ./do_generate 24 -c --mono CascadiaCodePLItalic-BoldItalic.ttf   DelugiaComplete-BoldItalic.ttf       "Delugia"            "Bold Italic"
+        ./do_generate 25 -c --mono CascadiaCodePL-Light.ttf              DelugiaCompleteLight.ttf             "Delugia Light"      ""
+        ./do_generate 26 -c --mono CascadiaCodePLItalic-LightItalic.ttf  DelugiaCompleteLight-Italic.ttf      "Delugia Light"      "Italic"
+        ./do_generate 31 -c --mono CascadiaMonoPL-Regular.ttf            DelugiaMonoComplete.ttf              "Delugia Mono"       "Regular"
+        ./do_generate 32 -c --mono CascadiaMonoPL-Bold.ttf               DelugiaMonoComplete-Bold.ttf         "Delugia Mono"       "Bold"
+        ./do_generate 33 -c --mono CascadiaMonoPLItalic-Italic.ttf       DelugiaMonoComplete-Italic.ttf       "Delugia Mono"       "Italic"
+        ./do_generate 34 -c --mono CascadiaMonoPLItalic-BoldItalic.ttf   DelugiaMonoComplete-BoldItalic.ttf   "Delugia Mono"       "Bold Italic"
+        ./do_generate 35 -c --mono CascadiaMonoPL-Light.ttf              DelugiaMonoCompleteLight.ttf         "Delugia Mono Light" ""
+        ./do_generate 36 -c --mono CascadiaCodePLItalic-LightItalic.ttf  DelugiaMonoCompleteLight-Italic.ttf  "Delugia Mono Light" "Italic"
         mkdir delugia-complete
         mv Delugia*ttf delugia-complete
         zip delugia-complete.zip delugia-complete/*
     - name: Build Book Complete
       run: |
-        ./do_generate 41 -c -c CascadiaCodePL-Regular.ttf            DelugiaBook.ttf                    "Delugia Book"              "Regular"
-        ./do_generate 42 -c -c CascadiaCodePL-Bold.ttf               DelugiaBook-Bold.ttf               "Delugia Book"              "Bold"
-        ./do_generate 43 -c -c CascadiaCodePL-Light.ttf              DelugiaBook-Light.ttf              "Delugia Book Light"        ""
-        ./do_generate 44 -c -c CascadiaCodePLItalic-Italic.ttf       DelugiaBookItalic-Italic.ttf       "Delugia Book Italic"       "Italic"
-        ./do_generate 45 -c -c CascadiaCodePLItalic-BoldItalic.ttf   DelugiaBookItalic-BoldItalic.ttf   "Delugia Book Italic"       "Bold Italic"
-        ./do_generate 46 -c -c CascadiaCodePLItalic-LightItalic.ttf  DelugiaBookItalic-LightItalic.ttf  "Delugia Book Italic Light" "Italic"
+        ./do_generate 41 -c -c CascadiaCodePL-Regular.ttf            DelugiaBook.ttf              "Delugia Book"       "Regular"
+        ./do_generate 42 -c -c CascadiaCodePL-Bold.ttf               DelugiaBook-Bold.ttf         "Delugia Book"       "Bold"
+        ./do_generate 43 -c -c CascadiaCodePLItalic-Italic.ttf       DelugiaBook-Italic.ttf       "Delugia Book"       "Italic"
+        ./do_generate 44 -c -c CascadiaCodePLItalic-BoldItalic.ttf   DelugiaBook-BoldItalic.ttf   "Delugia Book"       "Bold Italic"
+        ./do_generate 45 -c -c CascadiaCodePL-Light.ttf              DelugiaBookLight.ttf         "Delugia Book Light" ""
+        ./do_generate 46 -c -c CascadiaCodePLItalic-LightItalic.ttf  DelugiaBookLight-Italic.ttf  "Delugia Book Light" "Italic"
         mkdir delugia-book
         mv Delugia*ttf delugia-book
         zip delugia-book.zip delugia-book/*

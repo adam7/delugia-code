@@ -15,16 +15,18 @@ args = parser.parse_args()
 
 if args.style:
     args.style = " " + args.style
+fullname = "{}{}".format(args.name, args.style)
 
 # Open the file
 delugia=fontforge.open(args.input)
 
 # Rename the file
-delugia.fontname="{}{}".format(args.name, args.style).replace(" ", "")
-delugia.familyname=args.name
-delugia.fullname=args.name
+delugia.fontname = fullname.replace(" ", "")
+delugia.familyname = args.name
+delugia.fullname = fullname
+delugia.appendSFNTName("English (US)", "Family", args.name)
 delugia.appendSFNTName("English (US)", "Preferred Family", args.name)
-delugia.appendSFNTName("English (US)", "Compatible Full", args.name)
+delugia.appendSFNTName("English (US)", "Compatible Full", fullname)
 delugia.appendSFNTName("English (US)", "UniqueID", "{}{}".format(args.name, args.style))
 delugia.appendSFNTName("English (US)", "Trademark", "")
 

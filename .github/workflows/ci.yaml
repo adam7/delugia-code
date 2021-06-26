@@ -18,7 +18,7 @@ jobs:
     outputs:
       tag_name: ${{ env.CASCADIATAG }}
       tag_exists: ${{ steps.check_tag.outputs.exists }}
-  
+
     steps:
     - name: Fetch latest release of Cascadia Code
       uses: octokit/request-action@v2.x
@@ -40,7 +40,7 @@ jobs:
         tag: ${{ env.CASCADIATAG }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
+
   build-and-release:
     needs: check-for-new-cascadia
     if: ${{ github.event_name != 'schedule' || needs.check-for-new-cascadia.outputs.tag_exists != 'true' }}
@@ -78,12 +78,12 @@ jobs:
       run: fontforge -lang=ff -script extract-extra-glyphs
     - name: Build Powerline
       run: |
-        ./do_generate 01 --powerline --mono CascadiaCodePL-Regular.ttf            DelugiaPL.ttf                  "Delugia PL"            "Regular"
-        ./do_generate 02 --powerline --mono CascadiaCodePL-Bold.ttf               DelugiaPL-Bold.ttf             "Delugia PL"            "Bold"
-        ./do_generate 03 --powerline --mono CascadiaCodePLItalic-Italic.ttf       DelugiaPL-Italic.ttf           "Delugia PL"            "Italic"
-        ./do_generate 04 --powerline --mono CascadiaCodePLItalic-BoldItalic.ttf   DelugiaPL-BoldItalic.ttf       "Delugia PL"            "Bold Italic"
-        ./do_generate 05 --powerline --mono CascadiaCodePL-Light.ttf              DelugiaPLLight.ttf             "Delugia PL Light"      ""
-        ./do_generate 06 --powerline --mono CascadiaCodePLItalic-LightItalic.ttf  DelugiaPLLight-Italic.ttf      "Delugia PL Light"      "Italic"
+        ./do_generate 01 --powerline --mono CascadiaCodePL-Regular.ttf            DelugiaPL.ttf              "Delugia PL"       "Regular"
+        ./do_generate 02 --powerline --mono CascadiaCodePL-Bold.ttf               DelugiaPL-Bold.ttf         "Delugia PL"       "Bold"
+        ./do_generate 03 --powerline --mono CascadiaCodePLItalic-Italic.ttf       DelugiaPL-Italic.ttf       "Delugia PL"       "Italic"
+        ./do_generate 04 --powerline --mono CascadiaCodePLItalic-BoldItalic.ttf   DelugiaPL-BoldItalic.ttf   "Delugia PL"       "Bold Italic"
+        ./do_generate 05 --powerline --mono CascadiaCodePL-Light.ttf              DelugiaPLLight.ttf         "Delugia PL Light" ""
+        ./do_generate 06 --powerline --mono CascadiaCodePLItalic-LightItalic.ttf  DelugiaPLLight-Italic.ttf  "Delugia PL Light" "Italic"
         mkdir delugia-powerline
         mv Delugia*ttf delugia-powerline
         zip delugia-powerline.zip delugia-powerline/*
@@ -100,12 +100,12 @@ jobs:
         zip delugia-mono-powerline.zip delugia-mono-powerline/*
     - name: Build Complete
       run: |
-        ./do_generate 21 -c --mono CascadiaCodePL-Regular.ttf            DelugiaComplete.ttf                  "Delugia"            "Regular"
-        ./do_generate 22 -c --mono CascadiaCodePL-Bold.ttf               DelugiaComplete-Bold.ttf             "Delugia"            "Bold"
-        ./do_generate 23 -c --mono CascadiaCodePLItalic-Italic.ttf       DelugiaComplete-Italic.ttf           "Delugia"            "Italic"
-        ./do_generate 24 -c --mono CascadiaCodePLItalic-BoldItalic.ttf   DelugiaComplete-BoldItalic.ttf       "Delugia"            "Bold Italic"
-        ./do_generate 25 -c --mono CascadiaCodePL-Light.ttf              DelugiaCompleteLight.ttf             "Delugia Light"      ""
-        ./do_generate 26 -c --mono CascadiaCodePLItalic-LightItalic.ttf  DelugiaCompleteLight-Italic.ttf      "Delugia Light"      "Italic"
+        ./do_generate 21 -c --mono CascadiaCodePL-Regular.ttf            DelugiaComplete.ttf              "Delugia"       "Regular"
+        ./do_generate 22 -c --mono CascadiaCodePL-Bold.ttf               DelugiaComplete-Bold.ttf         "Delugia"       "Bold"
+        ./do_generate 23 -c --mono CascadiaCodePLItalic-Italic.ttf       DelugiaComplete-Italic.ttf       "Delugia"       "Italic"
+        ./do_generate 24 -c --mono CascadiaCodePLItalic-BoldItalic.ttf   DelugiaComplete-BoldItalic.ttf   "Delugia"       "Bold Italic"
+        ./do_generate 25 -c --mono CascadiaCodePL-Light.ttf              DelugiaCompleteLight.ttf         "Delugia Light" ""
+        ./do_generate 26 -c --mono CascadiaCodePLItalic-LightItalic.ttf  DelugiaCompleteLight-Italic.ttf  "Delugia Light" "Italic"
         mkdir delugia-complete
         mv Delugia*ttf delugia-complete
         zip delugia-complete.zip delugia-complete/*
@@ -172,7 +172,7 @@ jobs:
             object: context.sha,
             type: "commit"
           })
-          
+
           github.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,

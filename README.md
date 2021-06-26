@@ -36,7 +36,6 @@ _Complete_ includes these symbols additionally:
 * [Octicons](https://github.com/github/octicons)
 
 ### Which font faces are available
-Cascadia now bundles a version without ligatures, called Cascadia Mono, in addition to Cascadia Code which has ligatures.
 
 These three font versions are generated from Cascadia Code:
 * **Delugia Powerline** _Basic powerline glyphs, monospaced font_

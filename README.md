@@ -1,3 +1,4 @@
+![delugia image](/delugia_book.png)
 # Cascadia Code + Nerd Fonts
 Can we add Nerd Fonts to the [Cascadia Code](https://github.com/microsoft/cascadia-code) font using a GitHub Action?
 
@@ -70,6 +71,10 @@ You can use [scoop.sh](https://scoop.sh) to install and update the font. At firs
 2) `scoop bucket add nerd-fonts`
 3) `scoop install sudo`
 4) `sudo scoop install Delugia-Nerd-Font` or `sudo scoop install Delugia-Nerd-Font-Complete`
+
+### Example for Delugia on the command line
+
+![Delugia Powerline](/delugia_powerline.png)
 
 ### Help!
 I know basically nothing about patching fonts so all contributions are 🦸‍ welcome. 

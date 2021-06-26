@@ -27,7 +27,7 @@ delugia.fullname = fullname
 delugia.appendSFNTName("English (US)", "Family", args.name)
 delugia.appendSFNTName("English (US)", "Preferred Family", args.name)
 delugia.appendSFNTName("English (US)", "Compatible Full", fullname)
-delugia.appendSFNTName("English (US)", "UniqueID", "{}{}".format(args.name, args.style))
+delugia.appendSFNTName("English (US)", "UniqueID", "{};{}{}".format(args.version, args.name, args.style))
 delugia.appendSFNTName("English (US)", "Trademark", "")
 
 # Mix our version information in

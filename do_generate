@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+#
+# Create and rename one font style according to the specs
+#
+# Example invocation:
+#   do_generate 01 --powerline --mono CascadiaCodePL-Regular.ttf DelugiaPowerline.ttf Delugia Regular
+#
+# No parameters are checked, but they are:
+# 1: Number of logfile
+# 2: Conversion spec #1
+# 3: Conversion spec #2
+# 4: Input font file name
+# 5: Output font file name
+# 6: Font family name
+# 7: Font style name addendum
+
+set -e
+
+if [ "$#" -ne 7 ]; then
+    exit 1
+fi
+
+rm -f C*.ttf
+fontforge -script font-patcher --careful "${3}" --custom SomeExtraSymbols.otf --no-progressbars "ttf/static/${4}" "${2}" | tee "process${1}.log"
+
+OURVERSION=`git describe --always --tags`
+fontforge rename-font --input C*.ttf --output "${5}" --name "${6}" --style "${7}" --version "${OURVERSION}"

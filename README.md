@@ -1,4 +1,5 @@
-# Cascadia Code + Nerd Fonts 
+![delugia image](/delugia_book.png)
+# Cascadia Code + Nerd Fonts
 Can we add Nerd Fonts to the [Cascadia Code](https://github.com/microsoft/cascadia-code) font using a GitHub Action?
 
 Inspired by [Scott Hanselman](https://www.hanselman.com/blog/PatchingTheNewCascadiaCodeToIncludePowerlineGlyphsAndOtherNerdFontsForTheWindowsTerminal.aspx) and [Alistair Young](https://github.com/microsoft/cascadia-code/issues/10?WT.mc_id=-blog-scottha#issuecomment-532969414).
@@ -36,33 +37,50 @@ _Complete_ includes these symbols additionally:
 * [Octicons](https://github.com/github/octicons)
 
 ### Which font faces are available
-Cascadia now bundles a version without ligatures, called Cascadia Mono, in addition to Cascadia Code which has ligatures.
 
-These three faces are generated from Cascadia Code:
-* **Delugia Nerd Font Powerline** _Basic glyphs, monospaced font_
-* **Delugia Nerd Font Complete** _All Nerd Fonts glyphs, monospaced font_
-* **Delugia Nerd Font Book** _All Nerd Fonts glyphs, proportional font (not recommended for coding/console)_
+These three font versions are generated from Cascadia Code:
+* **Delugia Powerline** _Basic powerline glyphs, monospaced font_
+* **Delugia Complete** _All Nerd Fonts glyphs, monospaced font_
+* **Delugia Book** _All Nerd Fonts glyphs, proportional font (not recommended for coding/console)_
 
 And the following two faces are generated from Cascadia Mono and don't have ligatures:
-* **Delugia Mono Nerd Font Powerline** _Basic glyphs, monospaced font_
-* **Delugia Mono Nerd Font Complete** _All Nerd Fonts glyphs, monospaced font_
+* **Delugia Mono Powerline** _Basic powerline glyphs, monospaced font_
+* **Delugia Mono Complete** _All Nerd Fonts glyphs, monospaced font_
+
+All of these are available in light, regular, and bold weights. Complemented by matching italic fonts.
 
 ### How is Delugia special?
 Compared with other patched versions of Cascadia you will find
 * Added symbols ``≢`` (0u2262), ``≣`` (0u2263), ``❯`` (0u276F), and ``⚡`` (0u26A1) used with some popular Powerline setups
 * All added symbols centered on visual middle of the font (not a bit higher)
+* Light and bold weight
+* Italic faces
 
 ### How to use
-You can download the patched font from the [Releases page](https://github.com/adam7/delugia-code/releases) of this repo and install them as you would any other font. Once installed the font can be referenced as `Delugia Nerd Font`. So if, for example, you want to use it in Windows Terminal you should add this line to your profiles.json
+You can download the patched fonts from the [Releases page](https://github.com/adam7/delugia-code/releases) of this
+repo and install them as you would any other font. Once installed the font can be referenced as `Delugia *`.
+So if, for example, you want to use it in Windows Terminal you should add this line to your profiles.json
 
-`"fontFace" : "Delugia Nerd Font",`
+`"fontFace" : "Delugia Complete",`
 
 ### Installation with [scoop.sh](https://scoop.sh)
+_Scoop installation needs to be repaired after a naming change, I guess._
+
 You can use [scoop.sh](https://scoop.sh) to install and update the font. At first install [scoop](https://github.com/lukesampson/scoop) and add extra bucket for [nerd-fonts](https://github.com/matthewjberger/scoop-nerd-fonts): 
 1) `iwr -useb get.scoop.sh | iex`
 2) `scoop bucket add nerd-fonts`
 3) `scoop install sudo`
 4) `sudo scoop install Delugia-Nerd-Font` or `sudo scoop install Delugia-Nerd-Font-Complete`
 
+### Example for Delugia on the command line
+
+![Delugia Powerline](/delugia_powerline.png)
+
 ### Help!
 I know basically nothing about patching fonts so all contributions are 🦸‍ welcome. 
+
+### Note
+The naming changed a bit when we added the light and bold fonts.
+To reduce the font name length the 'Nerd Font' has been dropped out of the (file) names.
+The actual naming scheme changed to accommodate the new fonts and for your convenience we pack
+fonts that one particular user might want to use together in a zip archive.

@@ -18,7 +18,7 @@ jobs:
     outputs:
       tag_name: ${{ env.CASCADIATAG }}
       tag_exists: ${{ steps.check_tag.outputs.exists }}
-  
+
     steps:
     - name: Fetch latest release of Cascadia Code
       uses: octokit/request-action@v2.x
@@ -40,7 +40,7 @@ jobs:
         tag: ${{ env.CASCADIATAG }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
+
   build-and-release:
     needs: check-for-new-cascadia
     if: ${{ github.event_name != 'schedule' || needs.check-for-new-cascadia.outputs.tag_exists != 'true' }}
@@ -50,6 +50,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - name: Download latest version of Cascadia
       run: |
         CASCADIAVERS=`curl -L 'https://github.com/microsoft/cascadia-code/releases/latest' | grep CascadiaCode | sed 's!\(.*/microsoft/cascadia-code/releases/download/\([^"]*\).*\|.*span.*\)!\2!'`
@@ -74,75 +76,84 @@ jobs:
       run: pip install configparser
     - name: Extract additional powerline glyphs
       run: fontforge -lang=ff -script extract-extra-glyphs
-    - name: Prepare Cascadia Code font file
-      run: |
-        mkdir prepared
-        fontforge prepare-font --input ttf/CascadiaCodePL.ttf --output prepared/CascadiaCodePL.ttf
-        fontforge prepare-font --input ttf/CascadiaMonoPL.ttf --output prepared/CascadiaMonoPL.ttf
     - name: Build Powerline
       run: |
-        fontforge -script font-patcher --careful --powerline --custom SomeExtraSymbols.otf \
-                                       --no-progressbars --mono prepared/CascadiaCodePL.ttf | tee process.log
-        git describe --always --tags | xargs fontforge rename-font --input C*.ttf \
-                                                                    --output "Delugia Nerd Font.ttf" \
-                                                            --name "Delugia Nerd Font" \
-                                                            --version
-        rm C*.ttf
-        fontforge -script font-patcher --careful --powerline --custom SomeExtraSymbols.otf \
-                                       --no-progressbars --mono prepared/CascadiaMonoPL.ttf | tee process_mono.log
-        git describe --always --tags | xargs fontforge rename-font --input C*.ttf \
-                                                            --output "Delugia Mono Nerd Font.ttf" \
-                                                            --name "Delugia Mono Nerd Font" \
-                                                            --version
-        rm C*.ttf
+        ./do_generate 01 --powerline --mono CascadiaCodePL-Regular.ttf            DelugiaPL.ttf              "Delugia PL"       "Regular"
+        ./do_generate 02 --powerline --mono CascadiaCodePL-Bold.ttf               DelugiaPL-Bold.ttf         "Delugia PL"       "Bold"
+        ./do_generate 03 --powerline --mono CascadiaCodePLItalic-Italic.ttf       DelugiaPL-Italic.ttf       "Delugia PL"       "Italic"
+        ./do_generate 04 --powerline --mono CascadiaCodePLItalic-BoldItalic.ttf   DelugiaPL-BoldItalic.ttf   "Delugia PL"       "Bold Italic"
+        ./do_generate 05 --powerline --mono CascadiaCodePL-Light.ttf              DelugiaPLLight.ttf         "Delugia PL Light" ""
+        ./do_generate 06 --powerline --mono CascadiaCodePLItalic-LightItalic.ttf  DelugiaPLLight-Italic.ttf  "Delugia PL Light" "Italic"
+        mkdir delugia-powerline
+        mv Delugia*ttf delugia-powerline
+        zip delugia-powerline.zip delugia-powerline/*
+    - name: Build MonoPowerline
+      run: |
+        ./do_generate 11 --powerline --mono CascadiaMonoPL-Regular.ttf            DelugiaMonoPL.ttf              "Delugia PL Mono"       "Regular"
+        ./do_generate 12 --powerline --mono CascadiaMonoPL-Bold.ttf               DelugiaMonoPL-Bold.ttf         "Delugia PL Mono"       "Bold"
+        ./do_generate 13 --powerline --mono CascadiaMonoPLItalic-Italic.ttf       DelugiaMonoPL-Italic.ttf       "Delugia PL Mono"       "Italic"
+        ./do_generate 14 --powerline --mono CascadiaMonoPLItalic-BoldItalic.ttf   DelugiaMonoPL-BoldItalic.ttf   "Delugia PL Mono"       "Bold Italic"
+        ./do_generate 15 --powerline --mono CascadiaMonoPL-Light.ttf              DelugiaMonoPLLight.ttf         "Delugia PL Mono Light" ""
+        ./do_generate 16 --powerline --mono CascadiaCodePLItalic-LightItalic.ttf  DelugiaMonoPLLight-Italic.ttf  "Delugia PL Mono Light" "Italic"
+        mkdir delugia-mono-powerline
+        mv Delugia*ttf delugia-mono-powerline
+        zip delugia-mono-powerline.zip delugia-mono-powerline/*
     - name: Build Complete
       run: |
-        fontforge -script font-patcher --careful -c --custom SomeExtraSymbols.otf \
-                                       --no-progressbars --mono prepared/CascadiaCodePL.ttf | tee process_full.log
-        git describe --always --tags | xargs fontforge rename-font --input C*.ttf \
-                                                            --output "Delugia Nerd Font Complete.ttf" \
-                                                            --name "Delugia Nerd Font" \
-                                                            --version
-        rm C*.ttf
-        fontforge -script font-patcher --careful -c --custom SomeExtraSymbols.otf \
-                                       --no-progressbars --mono prepared/CascadiaMonoPL.ttf | tee process_mono_full.log
-        git describe --always --tags | xargs fontforge rename-font --input C*.ttf \
-                                                            --output "Delugia Mono Nerd Font Complete.ttf" \
-                                                            --name "Delugia Mono Nerd Font" \
-                                                            --version
-        rm C*.ttf
+        ./do_generate 21 -c --mono CascadiaCodePL-Regular.ttf            DelugiaComplete.ttf              "Delugia"       "Regular"
+        ./do_generate 22 -c --mono CascadiaCodePL-Bold.ttf               DelugiaComplete-Bold.ttf         "Delugia"       "Bold"
+        ./do_generate 23 -c --mono CascadiaCodePLItalic-Italic.ttf       DelugiaComplete-Italic.ttf       "Delugia"       "Italic"
+        ./do_generate 24 -c --mono CascadiaCodePLItalic-BoldItalic.ttf   DelugiaComplete-BoldItalic.ttf   "Delugia"       "Bold Italic"
+        ./do_generate 25 -c --mono CascadiaCodePL-Light.ttf              DelugiaCompleteLight.ttf         "Delugia Light" ""
+        ./do_generate 26 -c --mono CascadiaCodePLItalic-LightItalic.ttf  DelugiaCompleteLight-Italic.ttf  "Delugia Light" "Italic"
+        mkdir delugia-complete
+        mv Delugia*ttf delugia-complete
+        zip delugia-complete.zip delugia-complete/*
+    - name: Build Mono Complete
+      run: |
+        ./do_generate 31 -c --mono CascadiaMonoPL-Regular.ttf            DelugiaMonoComplete.ttf              "Delugia Mono"       "Regular"
+        ./do_generate 32 -c --mono CascadiaMonoPL-Bold.ttf               DelugiaMonoComplete-Bold.ttf         "Delugia Mono"       "Bold"
+        ./do_generate 33 -c --mono CascadiaMonoPLItalic-Italic.ttf       DelugiaMonoComplete-Italic.ttf       "Delugia Mono"       "Italic"
+        ./do_generate 34 -c --mono CascadiaMonoPLItalic-BoldItalic.ttf   DelugiaMonoComplete-BoldItalic.ttf   "Delugia Mono"       "Bold Italic"
+        ./do_generate 35 -c --mono CascadiaMonoPL-Light.ttf              DelugiaMonoCompleteLight.ttf         "Delugia Mono Light" ""
+        ./do_generate 36 -c --mono CascadiaCodePLItalic-LightItalic.ttf  DelugiaMonoCompleteLight-Italic.ttf  "Delugia Mono Light" "Italic"
+        mkdir delugia-mono-complete
+        mv Delugia*ttf delugia-mono-complete
+        zip delugia-complete.zip delugia-mono-complete/*
     - name: Build Book Complete
       run: |
-        fontforge -script font-patcher --careful -c --custom SomeExtraSymbols.otf \
-                                       --no-progressbars prepared/CascadiaCodePL.ttf | tee process_book.log
-        git describe --always --tags | xargs fontforge rename-font --input C*.ttf \
-                                                            --output "Delugia Nerd Font Book.ttf" \
-                                                            --name "Delugia Nerd Font Book" \
-                                                            --version
-        rm C*.ttf
+        ./do_generate 41 -c -c CascadiaCodePL-Regular.ttf            DelugiaBook.ttf              "Delugia Book"       "Regular"
+        ./do_generate 42 -c -c CascadiaCodePL-Bold.ttf               DelugiaBook-Bold.ttf         "Delugia Book"       "Bold"
+        ./do_generate 43 -c -c CascadiaCodePLItalic-Italic.ttf       DelugiaBook-Italic.ttf       "Delugia Book"       "Italic"
+        ./do_generate 44 -c -c CascadiaCodePLItalic-BoldItalic.ttf   DelugiaBook-BoldItalic.ttf   "Delugia Book"       "Bold Italic"
+        ./do_generate 45 -c -c CascadiaCodePL-Light.ttf              DelugiaBookLight.ttf         "Delugia Book Light" ""
+        ./do_generate 46 -c -c CascadiaCodePLItalic-LightItalic.ttf  DelugiaBookLight-Italic.ttf  "Delugia Book Light" "Italic"
+        mkdir delugia-book
+        mv Delugia*ttf delugia-book
+        zip delugia-book.zip delugia-book/*
     - name: Check for preexisting glyphs
       run: |
         grep 'Found existing' process*.log
     - uses: actions/upload-artifact@master
       with:
-        name: Delugia Nerd Font Powerline
-        path: "Delugia Nerd Font.ttf"
+        name: Delugia Powerline
+        path: "delugia-powerline"
     - uses: actions/upload-artifact@master
       with:
-        name: Delugia Nerd Font Complete
-        path: "Delugia Nerd Font Complete.ttf"
+        name: Delugia Mono Powerline
+        path: "delugia-mono-powerline"
     - uses: actions/upload-artifact@master
       with:
-        name: Delugia Nerd Font Book
-        path: "Delugia Nerd Font Book.ttf"
+        name: Delugia Complete
+        path: "delugia-complete"
     - uses: actions/upload-artifact@master
       with:
-        name: Delugia Mono Nerd Font Powerline
-        path: "Delugia Mono Nerd Font.ttf"
+        name: Delugia Mono Complete
+        path: "delugia-mono-complete"
     - uses: actions/upload-artifact@master
       with:
-        name: Delugia Mono Nerd Font Complete
-        path: "Delugia Mono Nerd Font Complete.ttf"
+        name: Delugia Book
+        path: "delugia-book"
 
     # Release part
     - name: Create tag
@@ -161,7 +172,7 @@ jobs:
             object: context.sha,
             type: "commit"
           })
-          
+
           github.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -178,10 +189,10 @@ jobs:
       with:
         tag_name: ${{ startsWith(github.ref, 'refs/tags/') && steps.get_tag_name.outputs.version || needs.check-for-new-cascadia.outputs.tag_name }}
         files: |
-          Delugia Nerd Font.ttf
-          Delugia Nerd Font Complete.ttf
-          Delugia Nerd Font Book.ttf
-          Delugia Mono Nerd Font.ttf
-          Delugia Mono Nerd Font Complete.ttf
+          delugia-powerline.zip
+          delugia-mono-powerline.zip
+          delugia-complete.zip
+          delugia-mono-complete.zip
+          delugia-book.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

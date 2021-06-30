@@ -119,7 +119,7 @@ jobs:
         ./do_generate 36 -c --mono CascadiaCodePLItalic-LightItalic.ttf  DelugiaMonoCompleteLight-Italic.ttf  "Delugia Mono Light" "Italic"
         mkdir delugia-mono-complete
         mv Delugia*ttf delugia-mono-complete
-        zip delugia-complete.zip delugia-mono-complete/*
+        zip delugia-mono-complete.zip delugia-mono-complete/*
     - name: Build Book Complete
       run: |
         ./do_generate 41 -c -c CascadiaCodePL-Regular.ttf            DelugiaBook.ttf              "Delugia Book"       "Regular"

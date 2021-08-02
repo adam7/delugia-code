@@ -72,7 +72,7 @@ jobs:
         CASCADIAVERS=`curl -L 'https://github.com/microsoft/cascadia-code/releases/latest' | grep CascadiaCode | sed 's!\(.*/microsoft/cascadia-code/releases/download/\([^"]*\).*\|.*span.*\)!\2!'`
         echo Downloading ${CASCADIAVERS}
         curl -L https://github.com/microsoft/cascadia-code/releases/download/${CASCADIAVERS}  -O
-        unzip CascadiaCode*.zip
+        unzip CascadiaCode*.zip 'ttf/*'
     - name: Install FontForge
       run: |
         sudo add-apt-repository ppa:fontforge/fontforge -y -u;

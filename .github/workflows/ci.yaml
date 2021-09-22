@@ -168,7 +168,7 @@ jobs:
             owner: context.repo.owner,
             repo: context.repo.repo,
             tag: tagName,
-            message: `Bump Cascadia version to ${tagName}`,
+            message: `Bump Delugia version to ${tagName}`,
             object: context.sha,
             type: "commit"
           })

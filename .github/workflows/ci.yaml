@@ -32,14 +32,16 @@ jobs:
     - name: Get the latest Cascadia tag
       run: |
         echo "CASCADIATAG=${{ fromJson(steps.get_latest_release.outputs.data).tag_name }}" >> $GITHUB_ENV
-        echo "Latest Cascadia tag is ${{ env.CASCADIATAG }}"
     - name: Check if tag exists
       uses: mukunku/tag-exists-action@v1.0.0
       id: check_tag
-      with: 
+      with:
         tag: ${{ env.CASCADIATAG }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Summary
+      run: |
+        echo "Latest Cascadia tag is $CASCADIATAG"
 
   build-and-release:
     needs: check-for-new-cascadia

@@ -49,11 +49,24 @@ jobs:
     runs-on: ubuntu-18.04
     env:
       NERDFONTVERS: v2.1.0
+      CASCADIATAG: ${{ needs.check-for-new-cascadia.outputs.tag_name }}
+      CASCADIATAG_ISNOTNEW: ${{ needs.check-for-new-cascadia.outputs.tag_exists }}
 
     steps:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
+    - name: Decide on version
+      run: |
+        if [ "${CASCADIATAG_ISNOTNEW}" = "false" ]; then
+          echo New release is not tagged yet in our repo
+          echo It will only be tagged after successfull release in job 'Create tag'
+          OURVERSION=${CASCADIATAG}
+        else
+          echo Re-release uses our manual tags and/or patchlevel
+          OURVERSION=`git describe --always --tags`
+        fi
+        echo "OURVERSION=${OURVERSION}" >> $GITHUB_ENV
     - name: Download latest version of Cascadia
       run: |
         CASCADIAVERS=`curl -L 'https://github.com/microsoft/cascadia-code/releases/latest' | grep CascadiaCode | sed 's!\(.*/microsoft/cascadia-code/releases/download/\([^"]*\).*\|.*span.*\)!\2!'`

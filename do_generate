@@ -23,5 +23,8 @@ fi
 rm -f C*.ttf
 fontforge -script font-patcher --careful "${3}" --custom SomeExtraSymbols.otf --no-progressbars "ttf/static/${4}" "${2}" | tee "process${1}.log"
 
-OURVERSION=`git describe --always --tags`
+if [ -z "${OURVERSION}" ]; then
+    # Github CI sets this variable, but this can be useful for manual calls:
+    OURVERSION=`git describe --always --tags`
+fi
 fontforge rename-font --input C*.ttf --output "${5}" --name "${6}" --style "${7}" --version "${OURVERSION}"

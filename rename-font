@@ -35,6 +35,13 @@ delugia.sfntRevision = None # Auto-set (refreshed) by fontforge
 delugia.appendSFNTName("English (US)", "Version", args.version)
 delugia.version = args.version
 
+if args.name.lower().find("mono"):
+    # For MS-Windows console apps
+    panose = list(delugia.os2_panose)
+    if panose[0] < 3: # https://forum.high-logic.com/postedfiles/Panose.pdf
+        panose[3] = 9 # 3 (4th value) = propotion: 9 = monospaced
+        delugia.os2_panose = tuple(panose)
+
 # Save
 delugia.generate(args.output)
 print("Generated '{}' from {}{} version {}".format(args.output, args.name, args.style, args.version))

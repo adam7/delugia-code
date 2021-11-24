@@ -12,7 +12,7 @@ curl -L https://github.com/ryanoasis/nerd-fonts/blob/${NERDFONTVERS}/src/glyphs/
 curl -L https://github.com/ryanoasis/nerd-fonts/blob/${NERDFONTVERS}/src/glyphs/Symbols%20Template%202048%20em.ttf?raw=true --output "src/glyphs/Symbols Template 2048 em.ttf"
 curl -L https://github.com/ryanoasis/nerd-fonts/blob/${NERDFONTVERS}/src/glyphs/Symbols-1000-em%20Nerd%20Font%20Complete.ttf?raw=true --output "src/glyphs/Symbols-1000-em Nerd Font Complete.ttf"
 curl -L https://github.com/ryanoasis/nerd-fonts/blob/${NERDFONTVERS}/src/glyphs/Symbols-2048-em%20Nerd%20Font%20Complete.ttf?raw=true --output "src/glyphs/Symbols-2048-em Nerd Font Complete.ttf"
-curl -L https://github.com/ryanoasis/nerd-fonts/blob/${NERDFONTVERS}/src/glyphs/Unicode_IEC_symbol_font.otf?raw=true --output src/glyphs//Unicode_IEC_symbol_font.otf
+curl -L https://github.com/ryanoasis/nerd-fonts/blob/${NERDFONTVERS}/src/glyphs/Unicode_IEC_symbol_font.otf?raw=true --output src/glyphs/Unicode_IEC_symbol_font.otf
 curl -L https://github.com/ryanoasis/nerd-fonts/blob/${NERDFONTVERS}/src/glyphs/devicons.ttf?raw=true --output src/glyphs/devicons.ttf
 curl -L https://github.com/ryanoasis/nerd-fonts/blob/${NERDFONTVERS}/src/glyphs/font-awesome-extension.ttf?raw=true --output src/glyphs/font-awesome-extension.ttf
 curl -L https://github.com/ryanoasis/nerd-fonts/blob/${NERDFONTVERS}/src/glyphs/font-logos.ttf?raw=true --output src/glyphs/font-logos.ttf

@@ -1,33 +1,38 @@
 #!/usr/bin/env python
 # coding=utf8
 
+import os.path
 import fontforge
 from argparse import ArgumentParser
+
+from name_parser import FontnameParser
 
 # Setup and parse the comand-line arguments
 parser = ArgumentParser()
 parser.add_argument("--input", help="input file name")
+parser.add_argument("--orig", help="original font filename")
 parser.add_argument("--output", help="output file name")
-parser.add_argument("--name", help="font name")
-parser.add_argument("--style", help="font sub-style")
+parser.add_argument("--name", help="preferred family name")
 parser.add_argument("--version", help="text to add to the existing version")
 args = parser.parse_args()
 
-if args.style:
-    args.style = " " + args.style
-fullname = "{}{}".format(args.name, args.style)
+SIL_TABLE = [('cascadia (code|mono)( pl)?', args.name), ]
+
+fname = os.path.splitext(os.path.basename(args.orig))[0]
+n = FontnameParser(fname)
+n.add_name_substitution_table(SIL_TABLE)
+n.set_keep_regular_in_family(False)
+if not n.parse_ok:
+    sys.exit("Something with name parsing went wrong")
 
 # Open the file
 delugia=fontforge.open(args.input)
 
 # Rename the file
-delugia.fontname = fullname.replace(" ", "")
-delugia.familyname = args.name
-delugia.fullname = fullname
-delugia.appendSFNTName("English (US)", "Family", args.name)
-delugia.appendSFNTName("English (US)", "Preferred Family", args.name)
-delugia.appendSFNTName("English (US)", "Compatible Full", fullname)
-delugia.appendSFNTName("English (US)", "UniqueID", "{};{}{}".format(args.version, args.name, args.style))
+n.rename_font(delugia)
+
+# Other information
+delugia.appendSFNTName("English (US)", "UniqueID", "{};{}".format(args.version, n.ps_fontname()))
 delugia.appendSFNTName("English (US)", "Trademark", "")
 
 # Mix our version information in
@@ -35,7 +40,7 @@ delugia.sfntRevision = None # Auto-set (refreshed) by fontforge
 delugia.appendSFNTName("English (US)", "Version", args.version)
 delugia.version = args.version
 
-if args.name.lower().find("mono"):
+if n.ps_fontname().lower().find("mono"):
     # For MS-Windows console apps
     panose = list(delugia.os2_panose)
     if panose[0] < 3: # https://forum.high-logic.com/postedfiles/Panose.pdf
@@ -44,4 +49,4 @@ if args.name.lower().find("mono"):
 
 # Save
 delugia.generate(args.output)
-print("Generated '{}' from {}{} version {}".format(args.output, args.name, args.style, args.version))
+print("Generated '{}' from {} version {}".format(args.output, n.fullname(), args.version))

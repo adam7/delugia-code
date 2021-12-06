@@ -12,11 +12,10 @@
 # 4: Input font file name
 # 5: Output font file name
 # 6: Font family name
-# 7: Font style name addendum
 
 set -e
 
-if [ "$#" -ne 7 ]; then
+if [ "$#" -ne 6 ]; then
     exit 1
 fi
 
@@ -27,4 +26,4 @@ if [ -z "${OURVERSION}" ]; then
     # Github CI sets this variable, but this can be useful for manual calls:
     OURVERSION=`git describe --always --tags`
 fi
-fontforge rename-font --input C*.ttf --output "${5}" --name "${6}" --style "${7}" --version "${OURVERSION}"
+fontforge rename-font --orig "ttf/static/${4}" --input C*.ttf --output "${5}" --version "${OURVERSION}" --name "${6}"

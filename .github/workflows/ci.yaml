@@ -109,7 +109,7 @@ jobs:
         ./do_generate 13 --powerline --mono CascadiaMonoPL-Italic.ttf             DelugiaMonoPL-Italic.ttf       "Delugia PL Mono"       "Italic"
         ./do_generate 14 --powerline --mono CascadiaMonoPL-BoldItalic.ttf         DelugiaMonoPL-BoldItalic.ttf   "Delugia PL Mono"       "Bold Italic"
         ./do_generate 15 --powerline --mono CascadiaMonoPL-Light.ttf              DelugiaMonoPLLight.ttf         "Delugia PL Mono Light" ""
-        ./do_generate 16 --powerline --mono CascadiaCodePL-LightItalic.ttf        DelugiaMonoPLLight-Italic.ttf  "Delugia PL Mono Light" "Italic"
+        ./do_generate 16 --powerline --mono CascadiaMonoPL-LightItalic.ttf        DelugiaMonoPLLight-Italic.ttf  "Delugia PL Mono Light" "Italic"
         mkdir delugia-mono-powerline
         mv Delugia*ttf delugia-mono-powerline
         zip delugia-mono-powerline.zip delugia-mono-powerline/*
@@ -131,7 +131,7 @@ jobs:
         ./do_generate 33 -c --mono CascadiaMonoPL-Italic.ttf             DelugiaMonoComplete-Italic.ttf       "Delugia Mono"       "Italic"
         ./do_generate 34 -c --mono CascadiaMonoPL-BoldItalic.ttf         DelugiaMonoComplete-BoldItalic.ttf   "Delugia Mono"       "Bold Italic"
         ./do_generate 35 -c --mono CascadiaMonoPL-Light.ttf              DelugiaMonoCompleteLight.ttf         "Delugia Mono Light" ""
-        ./do_generate 36 -c --mono CascadiaCodePL-LightItalic.ttf        DelugiaMonoCompleteLight-Italic.ttf  "Delugia Mono Light" "Italic"
+        ./do_generate 36 -c --mono CascadiaMonoPL-LightItalic.ttf        DelugiaMonoCompleteLight-Italic.ttf  "Delugia Mono Light" "Italic"
         mkdir delugia-mono-complete
         mv Delugia*ttf delugia-mono-complete
         zip delugia-mono-complete.zip delugia-mono-complete/*

@@ -16,7 +16,7 @@ parser.add_argument("--name", help="preferred family name")
 parser.add_argument("--version", help="text to add to the existing version")
 args = parser.parse_args()
 
-SIL_TABLE = [('cascadia (code|mono)( pl)?', args.name), ]
+SIL_TABLE = [('cascadia ?(code|mono)( ?pl)?', args.name), ]
 
 fname = os.path.splitext(os.path.basename(args.orig))[0]
 n = FontnameParser(fname)

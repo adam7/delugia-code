@@ -205,7 +205,7 @@ class FontnameParser:
         self.for_windows = False
         self.use_short_style = False
         self.keep_regular_in_family = False
-        self.suppress_preferred_if_identical = False
+        self.suppress_preferred_if_identical = True
         self.fullname_suff = ''
         self.fontname_suff = ''
         self.family_suff = ''
@@ -223,7 +223,7 @@ class FontnameParser:
         self.keep_regular_in_family = keep
 
     def set_suppress_preferred(self, suppress):
-        """Suppress ID16/17 if it is identical to ID1/2 (not recommended)"""
+        """Suppress ID16/17 if it is identical to ID1/2 (True is default)"""
         self.suppress_preferred_if_identical = suppress
 
     def inject_suffix(self, fullname, fontname, family):
@@ -335,7 +335,7 @@ class FontnameParser:
         """Get the SFNT Preferred Familyname (ID 16)"""
         if self.suppress_preferred_if_identical and len(self.weight_token) == 0:
             # Do not set if identical to ID 1
-            return ""
+            return ''
         return FontnameParser.concat(self.basename, self.rest, self.other_token, self.family_suff)
 
     def preferred_styles(self):
@@ -344,7 +344,7 @@ class FontnameParser:
         weights = self.weight_token
         if self.suppress_preferred_if_identical and len(weights) == 0:
             # Do not set if identical to ID 2
-            return ""
+            return ''
         # For naming purposes we want Oblique to be part of the styles
         (weights, styles) = FontnameParser.make_oblique_style(weights, styles)
         return FontnameParser.concat(weights, styles)
@@ -425,10 +425,10 @@ class FontnameParser:
 
         # Remove some entries from SFNT table; fontforge has no API function for that
         sfnt_list = []
-        for to_del in ['Preferred Family', 'Preferred Styles', 'Compatible Full', 'SubFamily']:
-            for l, k, v in list(font.sfnt_names):
-                if k != to_del:
-                    sfnt_list += [( l, k, v )]
+        TO_DEL = ['Preferred Family', 'Preferred Styles', 'Compatible Full', 'SubFamily']
+        for l, k, v in list(font.sfnt_names):
+            if not k in TO_DEL:
+                sfnt_list += [( l, k, v )]
 
         # Fontforge does not allow to set SubFamily to any value:
         #

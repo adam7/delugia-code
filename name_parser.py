@@ -106,9 +106,9 @@ class FontnameParser:
     def make_oblique_style(weights, styles):
         """Move "Oblique" from weights to styles for font naming purposes"""
         if 'Oblique' in weights:
-            weights = weights.copy()
+            weights = list(weights)
             weights.remove('Oblique')
-            styles = styles.copy()
+            styles = list(styles)
             styles.append('Oblique')
         return (weights, styles)
 
@@ -138,8 +138,8 @@ class FontnameParser:
         """Expects a filename following the 'FontFamilyName-FontStyle' pattern and returns ... parts"""
         name = re.sub('[_\s]+', ' ', name)
         matches = re.match(r'([^-]+)(?:-(.*))?', name)
-        familyname = FontnameParser.camel_casify(matches[1])
-        style = matches[2]
+        familyname = FontnameParser.camel_casify(matches.group(1))
+        style = matches.group(2)
 
         if not style:
             # No dash in name, maybe we have blanc separated filename?
@@ -187,7 +187,7 @@ class FontnameParser:
         # Recurse to see if unmatched stuff between dashes can belong to familyname
         if '-' in style:
             matches = re.match(r'(\w+)-(.*)', style)
-            return FontnameParser.parse_font_name(familyname + matches[1] + '-' + matches[2])
+            return FontnameParser.parse_font_name(familyname + matches.group(1) + '-' + matches.group(2))
 
         style = re.sub(r'(^|\s)\d+(\.\d+)+(\s|$)', r'\1\3', style) # Remove (free standing) version numbers
         style_parts = style.split(' ')
@@ -311,7 +311,7 @@ class FontnameParser:
         if 'Regular' in styles:
             if (not self.keep_regular_in_family # User says: Regular is the normal font, so it is not mentioned
                     or len(self.weight_token) > 0): # This is actually a malformed font name
-                styles = self.style_token.copy()
+                styles = list(self.style_token)
                 styles.remove('Regular')
         # For naming purposes we want Oblique to be part of the styles
         (weights, styles) = FontnameParser.make_oblique_style(weights, styles)

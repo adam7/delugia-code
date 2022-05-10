@@ -71,13 +71,16 @@ You can install your preferred version, or versions, of Delugia using the standa
 * `choco install nerd-fonts-delugiamono-complete`
 
 ### Installation with [scoop.sh](https://scoop.sh)
-_Scoop installation needs to be repaired after a naming change, I guess._
-
 You can use [scoop.sh](https://scoop.sh) to install and update the font. At first install [scoop](https://github.com/lukesampson/scoop) and add extra bucket for [nerd-fonts](https://github.com/matthewjberger/scoop-nerd-fonts): 
 1) `iwr -useb get.scoop.sh | iex`
 2) `scoop bucket add nerd-fonts`
 3) `scoop install sudo`
-4) `sudo scoop install Delugia-Nerd-Font` or `sudo scoop install Delugia-Nerd-Font-Complete`
+4) One or more of
+    * `sudo scoop install Delugia-Nerd-Font`
+    * `sudo scoop install Delugia-Nerd-Font-Complete`
+    * `sudo scoop install Delugia-Mono-Nerd-Font`
+    * `sudo scoop install Delugia-Mono-Nerd-Font-Complete`
+    * `sudo scoop install Delugia-Nerd-Font-Book`
 
 ### Example for Delugia on the command line
 

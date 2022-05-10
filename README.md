@@ -62,14 +62,13 @@ So if, for example, you want to use it in Windows Terminal you should add this l
 `"fontFace" : "Delugia Complete",`
 
 ### Installation with [Chocolatey](https://chocolatey.org/install)
-You can install you're preferred version, or versions, of Delugia using the standard Chocolatey incantations.
+You can install your preferred version, or versions, of Delugia using the standard Chocolatey incantations.
 
 * `choco install nerd-fonts-delugiamono-powerline`
 * `choco install nerd-fonts-delugiabook`
 * `choco install nerd-fonts-delugiapowerline`
 * `choco install nerd-fonts-delugiacomplete`
 * `choco install nerd-fonts-delugiamono-complete`
-
 
 ### Installation with [scoop.sh](https://scoop.sh)
 _Scoop installation needs to be repaired after a naming change, I guess._

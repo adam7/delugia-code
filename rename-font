@@ -5,7 +5,8 @@ import os.path
 import fontforge
 from argparse import ArgumentParser
 
-from name_parser import FontnameParser
+sys.path.insert(0, os.path.abspath(os.path.dirname(sys.argv[0])) + '/bin/scripts/name_parser/')
+from FontnameParser import FontnameParser
 
 # Setup and parse the comand-line arguments
 parser = ArgumentParser()

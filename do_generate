@@ -22,7 +22,7 @@ fi
 PWD=$( pwd )
 
 rm -f C*.ttf
-fontforge -script "${PWD}/font-patcher" --careful "${3}" --custom "${PWD}/SomeExtraSymbols.otf" --no-progressbars "${PWD}/ttf/static/${4}" "${2}" --outputdir "${PWD}" | tee "process${1}.log"
+fontforge -script "${PWD}/font-patcher" --careful "${3}" --custom SomeExtraSymbols.sfd --no-progressbars "${PWD}/ttf/static/${4}" "${2}" --outputdir "${PWD}" | tee "process${1}.log"
 
 if [ -z "${OURVERSION}" ]; then
     # Github CI sets this variable, but this can be useful for manual calls:

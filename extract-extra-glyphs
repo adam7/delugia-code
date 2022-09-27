@@ -2,4 +2,4 @@ Open($2);
 SelectAll();
 SelectFewer(0u26A1);
 Clear();
-Generate($1 + "/src/glyphs/SomeExtraSymbols.otf");
+Save($1 + "/src/glyphs/SomeExtraSymbols.sfd");

@@ -24,9 +24,7 @@ jobs:
       uses: octokit/request-action@v2.x
       id: get_latest_release
       with:
-        route: GET /repos/{owner}/{repo}/releases/latest
-        owner: microsoft
-        repo: cascadia-code
+        route: GET /repos/microsoft/cascadia-code/releases/latest
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Get the latest Cascadia tag

@@ -1,5 +1,5 @@
-Open("src/glyphs/Symbols-2048-em Nerd Font Complete.ttf");
+Open($1 + "/src/glyphs/Symbols-2048-em Nerd Font Complete.ttf");
 SelectAll();
 SelectFewer(0u26A1);
 Clear();
-Generate("src/glyphs/SomeExtraSymbols.otf");
+Generate($1 + "/src/glyphs/SomeExtraSymbols.otf");

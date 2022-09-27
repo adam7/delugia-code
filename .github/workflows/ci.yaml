@@ -53,7 +53,7 @@ jobs:
       CASCADIATAG_ISNOTNEW: ${{ needs.check-for-new-cascadia.outputs.tag_exists }}
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 0
     - name: Decide on version
@@ -68,10 +68,13 @@ jobs:
         fi
         echo "OURVERSION=${OURVERSION}" >> $GITHUB_ENV
     - name: Download latest version of Cascadia
+      uses: robinraju/release-downloader@v1.5
+      with:
+        repository: "microsoft/cascadia-code"
+        tag: ${{ needs.check-for-new-cascadia.outputs.tag_name }}
+        fileName: "*.zip"
+    - name: Open Cascadia release
       run: |
-        CASCADIAVERS=`curl -L 'https://github.com/microsoft/cascadia-code/releases/latest' | grep CascadiaCode | sed 's!\(.*/microsoft/cascadia-code/releases/download/\([^"]*\).*\|.*span.*\)!\2!'`
-        echo Downloading ${CASCADIAVERS}
-        curl -L https://github.com/microsoft/cascadia-code/releases/download/${CASCADIAVERS}  -O
         unzip CascadiaCode*.zip 'ttf/*'
     - name: Install FontForge
       run: |

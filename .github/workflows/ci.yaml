@@ -46,7 +46,6 @@ jobs:
     if: ${{ github.event_name != 'schedule' || needs.check-for-new-cascadia.outputs.tag_exists != 'true' }}
     runs-on: ubuntu-latest
     env:
-      NERDFONTVERS: v2.1.0
       CASCADIATAG: ${{ needs.check-for-new-cascadia.outputs.tag_name }}
       CASCADIATAG_ISNOTNEW: ${{ needs.check-for-new-cascadia.outputs.tag_exists }}
 
@@ -90,20 +89,22 @@ jobs:
         echo Try appimage with path
         fontforge --version
 
-    - name: Download and patch Font Patcher
+    - name: Get Font Patcher
+      uses: robinraju/release-downloader@v1.5
+      with:
+        repository: "ryanoasis/nerd-fonts"
+        latest: true
+        fileName: "FontPatcher.zip"
+    - name: Open Font Patcher release
       run: |
-        curl -L https://raw.githubusercontent.com/ryanoasis/nerd-fonts/${NERDFONTVERS}/font-patcher --output font-patcher
-        patch font-patcher 0001*.patch
-    - name: Download source fonts
-      run: |
-        chmod +x download-source-fonts.sh
-        ./download-source-fonts.sh
+        unzip FontPatcher.zip
+
     - name: Install PIP
       run: sudo apt install python3-pip -y
     - name: Install configparser
       run: pip3 install configparser
     - name: Extract additional powerline glyphs
-      run: fontforge -lang=ff -script "`pwd`/extract-extra-glyphs" "`pwd`"
+      run: fontforge -lang=ff -script "`pwd`/extract-extra-glyphs" "`pwd`" `pwd`/src/**/octicons.ttf
     - name: Build Powerline
       run: |
         ./do_generate 01 --powerline --mono CascadiaCodePL-Regular.ttf            DelugiaPL.ttf              "Delugia PL"

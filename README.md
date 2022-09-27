@@ -49,10 +49,7 @@ All of these are available in light, regular, and bold weights. Complemented by 
 
 ### How is Delugia special?
 Compared with other patched versions of Cascadia you will find
-* Added symbol ``⚡`` (0u26A1) used with some popular Powerline setups
-* All added symbols centered on visual middle of the font (not a bit higher)
-* Light and bold weight
-* Italic faces
+* Added symbol ``⚡`` (0u26A1) used with some popular Powerline setups (for not 'Complete')
 
 ### How to use
 You can download the patched fonts from the [Releases page](https://github.com/adam7/delugia-code/releases) of this

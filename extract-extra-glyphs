@@ -1,4 +1,4 @@
-Open($1 + "/src/glyphs/Symbols-2048-em Nerd Font Complete.ttf");
+Open($2);
 SelectAll();
 SelectFewer(0u26A1);
 Clear();

@@ -163,23 +163,23 @@ jobs:
     - name: Check for preexisting glyphs
       run: |
         grep 'Found existing' process*.log | grep  -vE ' Powerline(Extra)?Symbols>'
-    - uses: actions/upload-artifact@master
+    - uses: actions/upload-artifact@v3
       with:
         name: Delugia Powerline
         path: "delugia-powerline"
-    - uses: actions/upload-artifact@master
+    - uses: actions/upload-artifact@v3
       with:
         name: Delugia Mono Powerline
         path: "delugia-mono-powerline"
-    - uses: actions/upload-artifact@master
+    - uses: actions/upload-artifact@v3
       with:
         name: Delugia Complete
         path: "delugia-complete"
-    - uses: actions/upload-artifact@master
+    - uses: actions/upload-artifact@v3
       with:
         name: Delugia Mono Complete
         path: "delugia-mono-complete"
-    - uses: actions/upload-artifact@master
+    - uses: actions/upload-artifact@v3
       with:
         name: Delugia Book
         path: "delugia-book"
@@ -187,7 +187,7 @@ jobs:
     # Release part
     - name: Create tag
       if: ${{ github.event_name != 'pull_request' && !startsWith(github.ref, 'refs/tags/') && needs.check-for-new-cascadia.outputs.tag_exists != 'true' }}
-      uses: actions/github-script@v3
+      uses: actions/github-script@v6
       with:
         github-token: ${{ github.token }}
         script: |

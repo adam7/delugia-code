@@ -14,7 +14,7 @@ on:
 
 jobs:
   check-for-new-cascadia:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     outputs:
       tag_name: ${{ env.CASCADIATAG }}
       tag_exists: ${{ steps.check_tag.outputs.exists }}
@@ -44,7 +44,7 @@ jobs:
   build-and-release:
     needs: check-for-new-cascadia
     if: ${{ github.event_name != 'schedule' || needs.check-for-new-cascadia.outputs.tag_exists != 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     env:
       CASCADIATAG: ${{ needs.check-for-new-cascadia.outputs.tag_name }}
       CASCADIATAG_ISNOTNEW: ${{ needs.check-for-new-cascadia.outputs.tag_exists }}
@@ -78,7 +78,7 @@ jobs:
     # This can be replaced with the ordinary apt package when Ubuntu updates, probably with 22.10?
     - name: Fetch FontForge
       run: |
-        sudo apt install software-properties-common python3-fontforge -y -q
+        sudo apt install software-properties-common python3-fontforge fuse -y -q
         curl -L "https://github.com/fontforge/fontforge/releases/download/20220308/FontForge-2022-03-08-582bd41-x86_64.AppImage" \
           --output fontforge
         chmod u+x fontforge

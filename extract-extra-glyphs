@@ -1,7 +1,5 @@
-Open("src/glyphs/Hack-Regular.ttf");
+Open($2);
 SelectAll();
-SelectFewer(0u2262,0u2263);
-SelectFewer(0u276F);
 SelectFewer(0u26A1);
 Clear();
-Generate("src/glyphs/SomeExtraSymbols.otf");
+Save($1 + "/src/glyphs/SomeExtraSymbols.sfd");

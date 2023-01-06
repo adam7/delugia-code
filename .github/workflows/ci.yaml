@@ -31,7 +31,7 @@ jobs:
       run: |
         echo "CASCADIATAG=${{ fromJson(steps.get_latest_release.outputs.data).tag_name }}" >> $GITHUB_ENV
     - name: Check if tag exists
-      uses: mukunku/tag-exists-action@v1.0.0
+      uses: mukunku/tag-exists-action@v1.2.0
       id: check_tag
       with:
         tag: ${{ env.CASCADIATAG }}
@@ -65,7 +65,7 @@ jobs:
         fi
         echo "OURVERSION=${OURVERSION}" >> $GITHUB_ENV
     - name: Download latest version of Cascadia
-      uses: robinraju/release-downloader@v1.5
+      uses: robinraju/release-downloader@v1.7
       with:
         repository: "microsoft/cascadia-code"
         tag: ${{ needs.check-for-new-cascadia.outputs.tag_name }}

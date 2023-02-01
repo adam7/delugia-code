@@ -7,6 +7,7 @@ from argparse import ArgumentParser
 
 sys.path.insert(0, os.path.abspath(os.path.dirname(sys.argv[0])) + '/bin/scripts/name_parser/')
 from FontnameParser import FontnameParser
+from TableHEADWriter import TableHEADWriter
 
 # Setup and parse the comand-line arguments
 parser = ArgumentParser()
@@ -18,6 +19,8 @@ parser.add_argument("--version", help="text to add to the existing version")
 args = parser.parse_args()
 
 SIL_TABLE = [('cascadia ?(code|mono)( ?pl)?', args.name), ]
+
+print("\nRenaming process\n    {}\n as {}\n -> {}".format(args.input, args.orig, args.output))
 
 fname = os.path.splitext(os.path.basename(args.orig))[0]
 n = FontnameParser(fname)
@@ -51,3 +54,19 @@ if n.ps_fontname().lower().find("mono"):
 # Save
 delugia.generate(args.output)
 print("Generated '{}' from {} version {}".format(args.output, n.fullname(), args.version))
+
+# Fix fontforge destroying the font flags
+source_font = TableHEADWriter(args.orig)
+dest_font = TableHEADWriter(args.output)
+source_font.find_head_table(0)
+dest_font.find_head_table(0)
+
+print("Changing flags from 0x{:X} to 0x{:X}".format(dest_font.flags, source_font.flags))
+dest_font.putshort(source_font.flags, 'flags') # clear 'ppem_to_int' etc
+print("Changing lowestRecPPEM from {} to {}".format(dest_font.lowppem, source_font.lowppem))
+dest_font.putshort(source_font.lowppem, 'lowestRecPPEM')
+
+dest_font.reset_table_checksum()
+dest_font.reset_full_checksum()
+source_font.close()
+dest_font.close()

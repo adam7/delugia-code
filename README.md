@@ -54,9 +54,16 @@ Compared with other patched versions of Cascadia you will find
 ### How to use
 You can download the patched fonts from the [Releases page](https://github.com/adam7/delugia-code/releases) of this
 repo and install them as you would any other font. Once installed the font can be referenced as `Delugia *`.
-So if, for example, you want to use it in Windows Terminal you should add this line to your profiles.json
+So if, for example, you want to use it in Windows Terminal you should add the lines
 
-`"fontFace" : "Delugia Complete",`
+```
+                "font":
+                {
+                    "face": "Delugia"
+                }
+```
+
+to the corresponding profiles in your settings.json.
 
 ### Installation with [Chocolatey](https://chocolatey.org/install)
 You can install your preferred version, or versions, of Delugia using the standard Chocolatey incantations.
